@@ -21,15 +21,15 @@
             public const string Create = Base + "/foodItems";
         }
 
-        public static class Categories
+        public static class FoodCategories
         {
-            public const string GetAll = Base + "/categories";
+            public const string GetAll = Base + "/foodCategories";
 
-            public const string Get = Base + "/categories/{categoryName}";
+            public const string Get = Base + "/foodCategories/{categoryName}";
 
-            public const string Create = Base + "/categories";
+            public const string Create = Base + "/foodCategories";
 
-            public const string Delete = Base + "/categories/{categoryName}";
+            public const string Delete = Base + "/foodCategories/{categoryName}";
         }
     }
 }

@@ -22,6 +22,7 @@ namespace DontWaste.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServicesInAssembly(Configuration);
+            services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
         }
 
