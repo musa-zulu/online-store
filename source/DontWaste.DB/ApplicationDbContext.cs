@@ -6,12 +6,13 @@ namespace DontWaste.DB
     {
         int SaveChanges();
     }
+
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-        }       
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
