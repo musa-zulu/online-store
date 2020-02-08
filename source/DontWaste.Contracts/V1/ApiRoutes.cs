@@ -33,5 +33,18 @@
 
             public const string Create = Base + "/foodItems";
         }
+
+        public static class Orders
+        {
+            public const string GetAll = Base + "/orders";
+
+            public const string Get = Base + "/orders/{orderId}";
+
+            public const string Create = Base + "/orders";
+
+            public const string Update = Base + "/orders/{orderId}";
+
+            public const string Delete = Base + "/orders/{orderId}";
+        }
     }
 }

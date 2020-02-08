@@ -100,10 +100,11 @@
     <Compile Include="Domain\FoodCategory.cs" />
     <Compile Include="Domain\FoodItem.cs" />
     <Compile Include="Domain\ImageFile.cs" />
+    <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\PaginationFilter.cs" />
-    <Compile Include="Migrations\20200208183054_InitialMigration.cs" />
-    <Compile Include="Migrations\20200208183054_InitialMigration.designer.cs">
-      <DependentUpon>20200208183054_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20200208191331_InitialMigration.cs" />
+    <Compile Include="Migrations\20200208191331_InitialMigration.designer.cs">
+      <DependentUpon>20200208191331_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

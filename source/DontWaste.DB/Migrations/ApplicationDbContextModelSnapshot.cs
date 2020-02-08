@@ -65,7 +65,10 @@ namespace DontWaste.DB.Migrations
                     b.Property<Guid>("ImageFileId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal?>("Price")
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("FoodItemId");
@@ -73,6 +76,8 @@ namespace DontWaste.DB.Migrations
                     b.HasIndex("FoodCategoryId");
 
                     b.HasIndex("ImageFileId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("FoodItems");
                 });
@@ -101,6 +106,23 @@ namespace DontWaste.DB.Migrations
                     b.ToTable("ImageFiles");
                 });
 
+            modelBuilder.Entity("DontWaste.DB.Domain.Order", b =>
+                {
+                    b.Property<Guid>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateLastModified")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("DontWaste.DB.Domain.FoodItem", b =>
                 {
                     b.HasOne("DontWaste.DB.Domain.FoodCategory", "FoodCategory")
@@ -114,6 +136,10 @@ namespace DontWaste.DB.Migrations
                         .HasForeignKey("ImageFileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("DontWaste.DB.Domain.Order", null)
+                        .WithMany("FoodItems")
+                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }

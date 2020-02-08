@@ -18,6 +18,7 @@ namespace DontWaste.Server.Installers
             services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
             services.AddScoped<IFoodCategoryService, FoodCategoryService>();
             services.AddScoped<IFoodItemsService, FoodItemsService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
     }
 }

@@ -39,6 +39,10 @@ namespace DontWaste.Contracts.Services
         {
             return new Uri(_baseUri + ApiRoutes.FoodCategories.Get.Replace("{categoryId}", categoryId));
         }
-      
+
+        public Uri GetOrderUri(string orderId)
+        {
+            return new Uri(_baseUri + ApiRoutes.Orders.Get.Replace("{orderId}", orderId));
+        }
     }
 }

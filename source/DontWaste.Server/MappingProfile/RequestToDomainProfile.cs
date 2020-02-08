@@ -23,6 +23,8 @@ namespace DontWaste.Server.MappingProfile
             CreateMap<UpdateFoodCategoryRequest, FoodCategory>()
                 .ForMember(dest => dest.FoodItems, opt =>
                     opt.Ignore());
+            CreateMap<CreateOrderRequest, Order>().ReverseMap();
+            CreateMap<UpdateOrderRequest, Order>().ReverseMap();
         }
     }
 }

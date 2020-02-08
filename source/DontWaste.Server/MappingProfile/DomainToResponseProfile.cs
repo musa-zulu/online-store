@@ -14,6 +14,16 @@ namespace DontWaste.Server.MappingProfile
 
             CreateMap<ImageFile, ImageFileResponse>();
             CreateMap<FoodItem, FoodItemResponse>();
+            CreateMap<Order, OrderResponse>()
+                .ForMember(dest => dest.FoodItems, opt =>
+                    opt.MapFrom(src => src.FoodItems)).ReverseMap();
+            
+            CreateMap<OrderResponse, Order>()
+                .ForMember(dest => dest.FoodItems, opt =>
+                    opt.MapFrom(src => src.FoodItems)).ReverseMap();
+            CreateMap<OrderResponse, Order>()
+                .ForMember(dest => dest.FoodItems, opt =>
+                    opt.MapFrom(src => src.FoodItems)).ReverseMap();
         }
     }
 }

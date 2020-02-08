@@ -26,14 +26,14 @@ namespace DontWaste.Contracts.Services
             {
                 return await queryable
                     .Include(x => x.Image)
-                    .Include(x=>x.FoodCategory)
+                    .Include(x => x.FoodCategory)
                     .ToListAsync();
             }
 
             var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
             return await queryable
                 .Include(x => x.Image)
-                .Include(x=>x.FoodCategory)
+                .Include(x => x.FoodCategory)
                 .Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
         }
 

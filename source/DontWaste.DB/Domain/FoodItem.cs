@@ -10,7 +10,7 @@ namespace DontWaste.DB.Domain
 
         public string DishName { get; set; }
         public string FoodItemDescription { get; set; }
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
 
         public Guid FoodCategoryId { get; set; }
         public virtual FoodCategory FoodCategory { get; set; }

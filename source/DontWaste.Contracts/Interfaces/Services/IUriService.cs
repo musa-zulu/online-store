@@ -8,5 +8,6 @@ namespace DontWaste.Contracts.Interfaces.Services
         Uri GetFoodItemUri(string itemId);
         Uri GetAllUri(PaginationQuery pagination = null);
         Uri GetFoodCategoryUri(string categoryId);
+        Uri GetOrderUri(string orderId);
     }
 }
