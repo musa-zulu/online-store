@@ -20,7 +20,7 @@ namespace DontWaste.Contracts.Services
             return new Uri(_baseUri + ApiRoutes.FoodItems.Get.Replace("{itemId}", itemId));
         }
 
-        public Uri GetAllFoodItemsUri(PaginationQuery pagination = null)
+        public Uri GetAllUri(PaginationQuery pagination = null)
         {
             var uri = new Uri(_baseUri);
 
@@ -34,5 +34,11 @@ namespace DontWaste.Contracts.Services
 
             return new Uri(modifiedUri);
         }
+
+        public Uri GetFoodCategoryUri(string categoryId)
+        {
+            return new Uri(_baseUri + ApiRoutes.FoodCategories.Get.Replace("{categoryId}", categoryId));
+        }
+      
     }
 }

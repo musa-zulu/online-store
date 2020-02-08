@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+﻿using System.Threading.Tasks;
 using DontWaste.DB.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,12 +8,13 @@ namespace DontWaste.DB
 {
     public interface IApplicationDbContext
     {
-        IDbSet<FoodItem> FoodItems { get; set; }
-        IDbSet<FoodCategory> FoodCategories { get; set; }
-        IDbSet<ImageFile> ImageFiles { get; set; }
+        DbSet<FoodItem> FoodItems { get; set; }
+        DbSet<FoodCategory> FoodCategories { get; set; }
+        DbSet<ImageFile> ImageFiles { get; set; }
+        Task<int> SaveChangesAsync();
     }
 
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public sealed class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         private readonly IConfiguration _config;
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration config)
@@ -22,9 +23,11 @@ namespace DontWaste.DB
             _config = config;
         }
 
-        public IDbSet<FoodItem> FoodItems { get; set; }
-        public IDbSet<FoodCategory> FoodCategories { get; set; }
-        public IDbSet<ImageFile> ImageFiles { get; set; }
+        public DbSet<FoodItem> FoodItems { get; set; }
+        public DbSet<FoodCategory> FoodCategories { get; set; }
+        public DbSet<ImageFile> ImageFiles { get; set; }
+
+        public Task<int> SaveChangesAsync() => base.SaveChangesAsync();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -38,17 +41,31 @@ namespace DontWaste.DB
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<FoodCategory>()
+                .ToTable("FoodCategories");
+
             builder.Entity<FoodItem>()
-                .Property(f => f.FoodItemDescription)
+                .ToTable("FoodItems");
+
+            builder.Entity<FoodItem>()
+                .Property(f => f.FoodCategoryId)
                 .IsRequired();
+
+            builder.Entity<ImageFile>()
+                .ToTable("ImageFiles");
 
             builder.Entity<FoodCategory>()
                 .Property(f => f.Description)
+                .IsRequired();
+            
+            builder.Entity<FoodItem>()
+                .Property(f => f.FoodItemDescription)
                 .IsRequired();
 
             builder.Entity<ImageFile>()
                 .Property(f => f.Description)
                 .IsRequired();
+
         }
     }
 }

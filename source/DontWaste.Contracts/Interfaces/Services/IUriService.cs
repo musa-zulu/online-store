@@ -6,7 +6,7 @@ namespace DontWaste.Contracts.Interfaces.Services
     public interface IUriService
     {
         Uri GetFoodItemUri(string itemId);
-
-        Uri GetAllFoodItemsUri(PaginationQuery pagination = null);
+        Uri GetAllUri(PaginationQuery pagination = null);
+        Uri GetFoodCategoryUri(string categoryId);
     }
 }

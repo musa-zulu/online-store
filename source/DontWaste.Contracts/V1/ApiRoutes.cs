@@ -8,6 +8,19 @@
 
         public const string Base = Root + "/" + Version;
 
+        public static class FoodCategories
+        {
+            public const string GetAll = Base + "/foodCategories";
+
+            public const string Get = Base + "/foodCategories/{categoryId}";
+
+            public const string Create = Base + "/foodCategories";
+
+            public const string Update = Base + "/foodCategories/{categoryId}";
+
+            public const string Delete = Base + "/foodCategories/{categoryId}";
+        }
+
         public static class FoodItems
         {
             public const string GetAll = Base + "/foodItems";
@@ -19,17 +32,6 @@
             public const string Get = Base + "/foodItems/{itemId}";
 
             public const string Create = Base + "/foodItems";
-        }
-
-        public static class FoodCategories
-        {
-            public const string GetAll = Base + "/foodCategories";
-
-            public const string Get = Base + "/foodCategories/{categoryName}";
-
-            public const string Create = Base + "/foodCategories";
-
-            public const string Delete = Base + "/foodCategories/{categoryName}";
         }
     }
 }

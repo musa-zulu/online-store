@@ -3,7 +3,7 @@ using System.Linq;
 using DontWaste.Contracts.Interfaces.Services;
 using DontWaste.Contracts.V1.Requests;
 using DontWaste.Contracts.V1.Responses;
-using DontWaste.Server.Domain;
+using DontWaste.DB.Domain;
 
 namespace DontWaste.Server.Helpers
 {
@@ -12,11 +12,11 @@ namespace DontWaste.Server.Helpers
         public static PagedResponse<T> CreatePaginatedResponse<T>(IUriService uriService, PaginationFilter pagination, List<T> response)
         {
             var nextPage = pagination.PageNumber >= 1
-                ? uriService.GetAllFoodItemsUri(new PaginationQuery(pagination.PageNumber + 1, pagination.PageSize)).ToString()
+                ? uriService.GetAllUri(new PaginationQuery(pagination.PageNumber + 1, pagination.PageSize)).ToString()
                 : null;
 
             var previousPage = pagination.PageNumber - 1 >= 1
-                ? uriService.GetAllFoodItemsUri(new PaginationQuery(pagination.PageNumber - 1, pagination.PageSize)).ToString()
+                ? uriService.GetAllUri(new PaginationQuery(pagination.PageNumber - 1, pagination.PageSize)).ToString()
                 : null;
 
             return new PagedResponse<T>

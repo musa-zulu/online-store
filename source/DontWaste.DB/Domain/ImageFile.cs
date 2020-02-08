@@ -7,6 +7,7 @@ namespace DontWaste.DB.Domain
     {
         [Key]
         public Guid ImageFileId { get; set; }
+        public byte Image { get; set; }
         public string Description { get; set; }
     }
 }

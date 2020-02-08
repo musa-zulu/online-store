@@ -35,14 +35,9 @@ namespace DontWaste.DB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ImageFileId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("FoodCategoryId");
 
-                    b.HasIndex("ImageFileId");
-
-                    b.ToTable("FoodCategory");
+                    b.ToTable("FoodCategories");
                 });
 
             modelBuilder.Entity("DontWaste.DB.Domain.FoodItem", b =>
@@ -57,7 +52,7 @@ namespace DontWaste.DB.Migrations
                     b.Property<DateTime?>("DateLastModified")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("FoodCategoryId")
+                    b.Property<Guid>("FoodCategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FoodItemDescription")
@@ -73,7 +68,7 @@ namespace DontWaste.DB.Migrations
 
                     b.HasIndex("ImageFileId");
 
-                    b.ToTable("FoodItem");
+                    b.ToTable("FoodItems");
                 });
 
             modelBuilder.Entity("DontWaste.DB.Domain.ImageFile", b =>
@@ -92,25 +87,21 @@ namespace DontWaste.DB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte>("Image")
+                        .HasColumnType("tinyint");
+
                     b.HasKey("ImageFileId");
 
-                    b.ToTable("ImageFile");
-                });
-
-            modelBuilder.Entity("DontWaste.DB.Domain.FoodCategory", b =>
-                {
-                    b.HasOne("DontWaste.DB.Domain.ImageFile", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageFileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("ImageFiles");
                 });
 
             modelBuilder.Entity("DontWaste.DB.Domain.FoodItem", b =>
                 {
-                    b.HasOne("DontWaste.DB.Domain.FoodCategory", null)
+                    b.HasOne("DontWaste.DB.Domain.FoodCategory", "FoodCategory")
                         .WithMany("FoodItems")
-                        .HasForeignKey("FoodCategoryId");
+                        .HasForeignKey("FoodCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DontWaste.DB.Domain.ImageFile", "Image")
                         .WithMany()
