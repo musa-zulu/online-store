@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DontWaste.DB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200208135623_InitialMigration")]
+    [Migration("20200208183054_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,9 @@ namespace DontWaste.DB.Migrations
                     b.Property<DateTime?>("DateLastModified")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DishName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("FoodCategoryId")
                         .HasColumnType("uniqueidentifier");
 
@@ -63,6 +66,9 @@ namespace DontWaste.DB.Migrations
 
                     b.Property<Guid>("ImageFileId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("FoodItemId");
 

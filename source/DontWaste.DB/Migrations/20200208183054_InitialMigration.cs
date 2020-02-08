@@ -43,7 +43,9 @@ namespace DontWaste.DB.Migrations
                     FoodItemId = table.Column<Guid>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: true),
                     DateLastModified = table.Column<DateTime>(nullable: true),
+                    DishName = table.Column<string>(nullable: true),
                     FoodItemDescription = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: true),
                     FoodCategoryId = table.Column<Guid>(nullable: false),
                     ImageFileId = table.Column<Guid>(nullable: false)
                 },

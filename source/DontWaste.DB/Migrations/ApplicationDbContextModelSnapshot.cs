@@ -52,6 +52,9 @@ namespace DontWaste.DB.Migrations
                     b.Property<DateTime?>("DateLastModified")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DishName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("FoodCategoryId")
                         .HasColumnType("uniqueidentifier");
 
@@ -61,6 +64,9 @@ namespace DontWaste.DB.Migrations
 
                     b.Property<Guid>("ImageFileId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("FoodItemId");
 
