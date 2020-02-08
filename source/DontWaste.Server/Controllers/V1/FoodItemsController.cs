@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DontWaste.Contracts.Helpers;
@@ -52,6 +51,81 @@ namespace DontWaste.Server.Controllers.V1
 
             var paginationResponse = PaginationHelpers.CreatePaginatedResponse(_uriService, pagination, foodItemResponse);
             return Ok(paginationResponse);
+        }
+
+        [HttpGet(ApiRoutes.FoodItems.Get)]
+        public async Task<IActionResult> Get([FromRoute]Guid itemId)
+        {
+            var foodItem = await _foodItemsService.GetFoodItemByIdAsync(itemId);
+
+            if (foodItem == null)
+                return NotFound();
+
+            return Ok(new Response<FoodItemResponse>(_mapper.Map<FoodItemResponse>(foodItem)));
+        }
+
+        [HttpPost(ApiRoutes.FoodItems.Create)]
+        public async Task<IActionResult> Create([FromBody] CreateFoodItemRequest postRequest)
+        {
+            SetDefaultFieldsFor(postRequest);
+
+            var foodItem = _mapper.Map<CreateFoodItemRequest, FoodItem>(postRequest);
+            
+            await _foodItemsService.CreateFoodItemAsync(foodItem);
+
+            var locationUri = _uriService.GetFoodItemUri(foodItem.FoodItemId.ToString());
+            return Created(locationUri, new Response<FoodItemResponse>(_mapper.Map<FoodItemResponse>(foodItem)));
+        }
+
+        [HttpPut(ApiRoutes.FoodItems.Update)]
+        public async Task<IActionResult> Update([FromRoute]Guid itemId, [FromBody] UpdateFoodItemRequest request)
+        {
+            if (itemId == Guid.Empty)
+            {
+                return BadRequest(new ErrorResponse(new ErrorModel { Message = "The food item does not exist, or the id is empty." }));
+            }
+
+            UpdateBaseFieldsOn(request);
+
+            var foodItem = _mapper.Map<UpdateFoodItemRequest, FoodItem>(request);
+            foodItem.FoodItemId = itemId;
+            
+            var isUpdated = await _foodItemsService.UpdateFoodItemAsync(foodItem);
+
+            if (isUpdated)
+                return Ok(new Response<FoodItemResponse>(_mapper.Map<FoodItemResponse>(foodItem)));
+
+            return NotFound();
+        }
+
+        [HttpDelete(ApiRoutes.FoodItems.Delete)]
+        public async Task<IActionResult> Delete([FromRoute] Guid itemId)
+        {
+            if (itemId == Guid.Empty)
+                return NoContent();
+
+            var deleted = await _foodItemsService.DeleteFoodItemAsync(itemId);
+
+            if (deleted)
+                return NoContent();
+
+            return NotFound();
+        }
+
+        private void SetDefaultFieldsFor(CreateFoodItemRequest postRequest)
+        {
+            postRequest.FoodItemId = Guid.NewGuid();
+            postRequest.DateCreated = DateTimeProvider.Now;
+            postRequest.DateLastModified = DateTimeProvider.Now;
+            postRequest.Image.DateCreated = DateTimeProvider.Now;
+            postRequest.Image.DateLastModified = DateTimeProvider.Now;
+            postRequest.Image.ImageFileId = Guid.NewGuid();
+            postRequest.ImageFileId = postRequest.Image.ImageFileId;
+        }
+
+        private void UpdateBaseFieldsOn(UpdateFoodItemRequest request)
+        {
+            request.DateLastModified = DateTimeProvider.Now;
         }
 
     }

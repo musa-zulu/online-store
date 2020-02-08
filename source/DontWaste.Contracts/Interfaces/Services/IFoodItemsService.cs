@@ -10,6 +10,7 @@ namespace DontWaste.Contracts.Interfaces.Services
         Task<List<FoodItem>> GetAllFoodItemsAsync(PaginationFilter paginationFilter = null);
         Task<bool> CreateFoodItemAsync(FoodItem foodItem);
         Task<FoodItem> GetFoodItemByDescriptionAsync(string foodItemDescription);
+        Task<bool> UpdateFoodItemAsync(FoodItem foodItemToUpdate);
         Task<bool> DeleteFoodItemAsync(Guid foodItemId);
         Task<FoodItem> GetFoodItemByIdAsync(Guid foodItemId);
     }

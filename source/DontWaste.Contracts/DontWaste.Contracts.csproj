@@ -188,6 +188,7 @@
     <Compile Include="V1\Requests\ImageFileRequest.cs" />
     <Compile Include="V1\Requests\Queries\PaginationQuery.cs" />
     <Compile Include="V1\Requests\UpdateFoodCategoryRequest.cs" />
+    <Compile Include="V1\Requests\UpdateFoodItemRequest.cs" />
     <Compile Include="V1\Responses\ErrorModel.cs" />
     <Compile Include="V1\Responses\ErrorResponse.cs" />
     <Compile Include="V1\Responses\FoodCategoryResponse.cs" />
