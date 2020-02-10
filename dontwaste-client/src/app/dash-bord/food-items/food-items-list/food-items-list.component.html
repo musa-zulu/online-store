@@ -35,8 +35,6 @@
      <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let element" class="action-link">
-        <a routerLink="/foodItems/new">
-          <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a> |
         <a (click)="openConfirmationDialog(element)">
           <i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
       </td>

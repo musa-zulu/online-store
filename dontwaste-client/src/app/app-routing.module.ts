@@ -4,6 +4,8 @@ import { FoodCategoriesListComponent } from './dash-bord/food-categories/food-ca
 import { DashBordComponent } from './dash-bord/dash-bord.component';
 import { FoodItemsComponent } from './dash-bord/food-items/food-items.component';
 import { FoodItemsListComponent } from './dash-bord/food-items/food-items-list/food-items-list.component';
+import { OrdersComponent } from './dash-bord/orders/orders.component';
+import { ShoppingCartComponent } from './dash-bord/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashbord', pathMatch: 'full'},
@@ -11,6 +13,8 @@ const routes: Routes = [
   {path: 'foodCategories', component: FoodCategoriesListComponent},
   {path: 'foodItems', component: FoodItemsListComponent},
   {path: 'foodItems/new', component: FoodItemsComponent},
+  {path: 'orders', component: OrdersComponent},
+  {path: 'shopping-cart', component: ShoppingCartComponent},
 ];
 
 @NgModule({

@@ -25,6 +25,11 @@ import { FoodItemsListComponent } from './dash-bord/food-items/food-items-list/f
 import { ConfirmationDialogComponent } from './dash-bord/confirmation-dialog/confirmation-dialog.component';
 import { FoodItemsService } from './services/food-items.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { FoodItemQuatityComponent } from './dash-bord/food-item-quatity/food-item-quatity.component';
+import { CheckoutComponent } from './dash-bord/checkout/checkout.component';
+import { OrdersComponent } from './dash-bord/orders/orders.component';
+import { OrdersService } from './services/orders.service';
+import { ShoppingCartComponent } from './dash-bord/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,11 @@ import { ShoppingCartService } from './services/shopping-cart.service';
     FoodItemsCardComponent,
     UpdloadComponent,
     FoodItemsListComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    FoodItemQuatityComponent,
+    CheckoutComponent,
+    OrdersComponent,
+    ShoppingCartComponent
   ],
   imports: [
     FormsModule,
@@ -61,7 +70,11 @@ import { ShoppingCartService } from './services/shopping-cart.service';
     DialogBoxComponent,
     ConfirmationDialogComponent
   ],
-  providers: [FoodCategoriesService, ConfirmationDialogComponent, FoodItemsService, ShoppingCartService],
+  providers: [FoodCategoriesService,
+    ConfirmationDialogComponent,
+     FoodItemsService,
+     ShoppingCartService,
+     OrdersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

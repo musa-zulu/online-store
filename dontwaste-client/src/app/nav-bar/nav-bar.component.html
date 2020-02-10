@@ -13,20 +13,15 @@
           <a class="nav-link" routerLink="/shopping-cart">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             <span class="badge badge-warning badge-pill" *ngIf="cart$ | async as cart">
-              <!--{{ cart.totalItemsCount }}-->
+              {{ cart.totalItemsCount }}
             </span>
           </a>
         </li>
       </ul>
       <ul class="navbar-nav">
-        <ng-template #anonymousUser>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
-          </li>
-        </ng-template>
         <a class="dropdown-item" routerLink="foodCategories">Manage Food Categories</a>
         <a class="dropdown-item" routerLink="foodItems">Manage Food Items</a>
-        <a class="dropdown-item" routerLink="/orders">Orders</a>
+        <a class="dropdown-item" routerLink="orders">Orders</a>
       </ul>
     </div>
   </div>

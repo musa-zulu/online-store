@@ -1,0 +1,6 @@
+<h2>Finalizing order</h2>
+<div class="row" *ngIf="cart$ | async as cart">
+  <div class="col-6">
+    <app-shopping-card-summary [cart]="cart"></app-shopping-card-summary>
+  </div>
+</div>

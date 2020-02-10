@@ -30,6 +30,14 @@ export class ShoppingCartService {
 
   }
 
+  removeFromCart(product: import("../models/food-item").FoodItem) {
+    throw new Error("Method not implemented.");
+  }
+
+  clearCart() {
+    throw new Error("Method not implemented.");
+  }
+
   private handleError(error: any) {
     // tslint:disable-next-line: deprecation
     return Observable.throw(error);

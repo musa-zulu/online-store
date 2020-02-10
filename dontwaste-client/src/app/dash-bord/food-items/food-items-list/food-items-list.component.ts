@@ -5,6 +5,7 @@ import { FoodItemsService } from 'src/app/services/food-items.service';
 import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 import { switchMap } from 'rxjs/operators';
 import { timer } from 'rxjs/internal/observable/timer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-food-items-list',
@@ -20,7 +21,8 @@ export class FoodItemsListComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
 
-  constructor(private foodItemsService: FoodItemsService, private confirmationDialogService: ConfirmationDialogService) { }
+  constructor(private foodItemsService: FoodItemsService,
+              private confirmationDialogService: ConfirmationDialogService) { }
 
    ngOnInit() {
    this.getFoodItems().subscribe((foodItems) => {
@@ -38,11 +40,6 @@ export class FoodItemsListComponent implements OnInit {
   addFoodItem(foodItem: FoodItem) {
     this.foodItemsService.addFoodItem(foodItem);
     console.log(foodItem);
-    this.refreshTable();
-  }
-
-  updateFoodItem(foodItem: FoodItem) {
-    this.foodItemsService.updateFoodItem(foodItem);
     this.refreshTable();
   }
 
@@ -70,9 +67,11 @@ export class FoodItemsListComponent implements OnInit {
 
   openConfirmationDialog(foodItem) {
     this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to delete... ?')
-    .then((res) => {
-      this.deleteFoodItem(foodItem);
-      console.log('User confirmed:', res);
+    .then((confirmed) => {
+      if (confirmed) {
+        this.deleteFoodItem(foodItem);
+      }
+      console.log('User confirmed:', confirmed);
     })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }

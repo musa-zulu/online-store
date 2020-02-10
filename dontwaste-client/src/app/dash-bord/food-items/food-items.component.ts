@@ -5,6 +5,8 @@ import { FoodItemsService } from 'src/app/services/food-items.service';
 import 'rxjs/add/operator/take';
 import { FoodItem } from 'src/app/models/food-item';
 import { FormControl } from '@angular/forms';
+import { timer } from 'rxjs/internal/observable/timer';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
 
 @Component({
   selector: 'app-food-items',
@@ -12,7 +14,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./food-items.component.css']
 })
 export class FoodItemsComponent implements OnInit {
-
+  static readonly POLLING_INTERVAL = 4000;
   categories$;
   foodItem: FoodItem = new FoodItem();
   foodItemId;
@@ -23,19 +25,20 @@ export class FoodItemsComponent implements OnInit {
     private route: ActivatedRoute,
     private foodCategoriesService: FoodCategoriesService,
     private foodItemService: FoodItemsService) {
-    this.getFoodCategories();
+      this.getFoodCategories().subscribe((foodCategories) => {
+        this.categories$ = foodCategories.data;
+        console.log();
+      });
 
-    this.foodItemId = this.route.snapshot.paramMap.get('foodItemId');
-    if (this.foodItemId) {
+      this.foodItemId = this.route.snapshot.paramMap.get('foodItemId');
+      if (this.foodItemId) {
       this.getByFoodItem();
     }
   }
 
   private getFoodCategories() {
-    return  this.foodCategoriesService.getFoodCategories().subscribe((foodCategories) => {
-      this.categories$ = foodCategories.data;
-      console.log();
-    });
+    return timer(0, FoodItemsComponent.POLLING_INTERVAL)
+    .pipe(switchMap(() => this.foodCategoriesService.getFoodCategories()));
   }
 
   getByFoodItem() {

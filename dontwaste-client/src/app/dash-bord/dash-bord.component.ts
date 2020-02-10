@@ -14,7 +14,7 @@ import { FoodItemsService } from '../services/food-items.service';
 export class DashBordComponent implements OnInit {
   foodItems: FoodItem[] = [];
   filteredFoodItems: FoodItem[] = [];
-  categoryId: string;
+  foodCategory: FoodItem;
   cart$: Observable<ShoppingCart>;
 
   constructor(
@@ -37,14 +37,14 @@ export class DashBordComponent implements OnInit {
         return this.route.queryParamMap;
       })
       .subscribe(params => {
-        //this.category = params.('category');
+        //this.foodCategory = params.get('category');
         this.applyFilter();
       });
   }
 
   private applyFilter() {
-    this.filteredFoodItems = (this.categoryId) ?
-    this.foodItems.filter(p => p.foodCategoryId === this.categoryId) :
+    this.filteredFoodItems = (this.foodCategory) ?
+    this.foodItems.filter(p => p.foodCategoryId === this.foodCategory.foodCategoryId) :
     this.foodItems;
   }
 }
