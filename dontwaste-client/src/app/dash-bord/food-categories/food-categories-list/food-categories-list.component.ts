@@ -4,6 +4,8 @@ import { FoodCategoriesService } from 'src/app/services/food-categories.service'
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatDialog } from '@angular/material';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
+import { timer } from 'rxjs/internal/observable/timer';
 
 @Component({
   selector: 'app-food-categories-list',
@@ -11,6 +13,10 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
   styleUrls: ['./food-categories-list.component.css']
 })
 export class FoodCategoriesListComponent implements OnInit {
+
+  constructor(private foodCategoriesService: FoodCategoriesService, public dialog: MatDialog) { }
+
+  static readonly POLLING_INTERVAL = 1000;
   foodCategories: FoodCategory[];
   filteredFoodCategories: FoodCategory[] = [];
   displayedColumns: string[] = ['description', 'action'];
@@ -18,10 +24,13 @@ export class FoodCategoriesListComponent implements OnInit {
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
 
-  constructor(private foodCategoriesService: FoodCategoriesService, public dialog: MatDialog) { }
-
   async ngOnInit() {
-    this.getFoodCategories();
+    this.getFoodCategories()
+    .subscribe((foodCategories) => {
+      this.foodCategories = foodCategories.data;
+      this.initializeTable(this.foodCategories);
+      console.log();
+    });
   }
 
   openDialog(action: any, foodCategory) {
@@ -47,12 +56,8 @@ export class FoodCategoriesListComponent implements OnInit {
   }
 
   getFoodCategories() {
-    return this.foodCategoriesService.getFoodCategories()
-    .subscribe((foodCategories) => {
-      this.foodCategories = foodCategories.data;
-      this.initializeTable(this.foodCategories);
-      console.log();
-    });
+    return timer(0, FoodCategoriesListComponent.POLLING_INTERVAL)
+    .pipe(switchMap(() => this.foodCategoriesService.getFoodCategories()));
   }
 
   addFoodCategory(foodCategory: FoodCategory) {

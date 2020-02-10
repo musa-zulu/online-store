@@ -24,15 +24,25 @@ export class FoodItemsService {
           catchError(this.handleError));
   }
 
-  getFoodItem(foodItemId: any): FoodItem {
-    throw new Error("Method not implemented.");
+  getFoodItem(foodItem: FoodItem): Observable<any> {
+    return this.http
+        .post<FoodItem>(this.serverConfig.getBaseUrl() + this.apiURL + '/', foodItem.foodItemId,
+        this.serverConfig.getRequestOptions())
+        .pipe(
+          retry(1),
+          catchError(this.handleError));
   }
 
-  deleteFoodItem(foodItemId: any) {
-    throw new Error("Method not implemented.");
+  deleteFoodItem(foodItem: FoodItem) {
+    return this.http
+    .delete<FoodItem>(this.serverConfig.getBaseUrl() + this.apiURL + '/' + foodItem.foodItemId, this.serverConfig.getRequestOptions())
+    .toPromise();
   }
-  updateFoodItem(foodItem: any) {
-    throw new Error("Method not implemented.");
+
+  updateFoodItem(foodItem: FoodItem) {
+    return this.http
+        .put(this.serverConfig.getBaseUrl() + this.apiURL + '/', foodItem, this.serverConfig.getRequestOptions())
+        .toPromise();
   }
 
   public addFoodItem(foodItem: FoodItem): Promise<any> {
@@ -45,11 +55,4 @@ export class FoodItemsService {
     // tslint:disable-next-line: deprecation
     return Observable.throw(error);
   }
-
-  /*createImagePath(serverPath: string) {
-    return this.http
-    .post(this.serverConfig.getBaseUrl() +
-    `Updload`, this.serverConfig.getRequestOptions())
-    .toPromise();
-  }*/
 }

@@ -15,7 +15,7 @@ export class ShoppingCart {
   }
 
   getQuantity(foodItem: FoodItem) {
-    const item = this.itemsMap[foodItem.itemId];
+    const item = this.itemsMap[foodItem.foodItemId];
     return item ? item.quantity : 0;
   }
 

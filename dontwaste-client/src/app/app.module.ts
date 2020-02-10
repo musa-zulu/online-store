@@ -21,6 +21,10 @@ import { ShoppingCardSummaryComponent } from './dash-bord/shopping-card-summary/
 import { FoodItemsComponent } from './dash-bord/food-items/food-items.component';
 import { FoodItemsCardComponent } from './dash-bord/food-items-card/food-items-card.component';
 import { UpdloadComponent } from './dash-bord/food-items/updload/updload.component';
+import { FoodItemsListComponent } from './dash-bord/food-items/food-items-list/food-items-list.component';
+import { ConfirmationDialogComponent } from './dash-bord/confirmation-dialog/confirmation-dialog.component';
+import { FoodItemsService } from './services/food-items.service';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,9 @@ import { UpdloadComponent } from './dash-bord/food-items/updload/updload.compone
     ShoppingCardSummaryComponent,
     FoodItemsComponent,
     FoodItemsCardComponent,
-    UpdloadComponent
+    UpdloadComponent,
+    FoodItemsListComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     FormsModule,
@@ -52,9 +58,10 @@ import { UpdloadComponent } from './dash-bord/food-items/updload/updload.compone
     MatButtonModule,
   ],
   entryComponents: [
-    DialogBoxComponent
+    DialogBoxComponent,
+    ConfirmationDialogComponent
   ],
-  providers: [FoodCategoriesService],
+  providers: [FoodCategoriesService, ConfirmationDialogComponent, FoodItemsService, ShoppingCartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

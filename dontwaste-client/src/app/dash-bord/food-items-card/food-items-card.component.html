@@ -1,1 +1,16 @@
-<p>food-items-card-component works!</p>
+<div *ngIf="foodItem.dishName" class="card">
+  <div class="card-body">
+    <h4 class="card-title">{{ foodItem.dishName }}</h4>
+    <p class="card-text">{{ foodItem.price | currency:'ZAR':true }}</p>
+  </div>
+  <div *ngIf="showActions && shoppingCart" class="card-footer">
+    <button
+      *ngIf="shoppingCart.getQuantity(foodItem) === 0; else updateQuantity"
+      (click)="addToCart()"
+      class="btn btn-secondary btn-block">Add to Cart</button>
+    <ng-template #updateQuantity>
+      <!-- <product-quantity [product]="product" [shopping-cart]="shoppingCart">
+      </product-quantity>-->
+    </ng-template>
+  </div>
+</div>

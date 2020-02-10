@@ -3,12 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { FoodCategoriesListComponent } from './dash-bord/food-categories/food-categories-list/food-categories-list.component';
 import { DashBordComponent } from './dash-bord/dash-bord.component';
 import { FoodItemsComponent } from './dash-bord/food-items/food-items.component';
+import { FoodItemsListComponent } from './dash-bord/food-items/food-items-list/food-items-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashbord', pathMatch: 'full'},
   {path: 'dashbord', component: DashBordComponent},
   {path: 'foodCategories', component: FoodCategoriesListComponent},
-  {path: 'foodItems', component: FoodItemsComponent},
+  {path: 'foodItems', component: FoodItemsListComponent},
+  {path: 'foodItems/new', component: FoodItemsComponent},
 ];
 
 @NgModule({

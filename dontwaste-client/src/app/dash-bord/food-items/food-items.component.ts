@@ -39,7 +39,11 @@ export class FoodItemsComponent implements OnInit {
   }
 
   getByFoodItem() {
-    this.foodItem = this.foodItemService.getFoodItem(this.foodItemId);
+    return  this.foodItemService.getFoodItem(this.foodItemId)
+    .subscribe((foodItem) => {
+      this.foodItem = foodItem.data;
+      console.log();
+    });
   }
 
   save(foodItem) {
@@ -53,17 +57,8 @@ export class FoodItemsComponent implements OnInit {
     this.router.navigate(['foodItems']);
   }
 
-  delete() {
-    if (!confirm('Are you sure you want to delete this product?')) { return; }
-    this.foodItemService.deleteFoodItem(this.foodItemId);
-    this.router.navigate(['foodItems']);
-  }
   ngOnInit() {
   }
-
-  /*public createImgPath = (serverPath: string) => {
-    return  this.foodItemService.createImagePath(serverPath);
-  }*/
 
   public uploadFinished = (event) => {
     this.response = event;

@@ -1,4 +1,14 @@
-
+<p>
+  <button mat-button routerLink="/foodItems" mat-flat-button color="primary" >
+    Food Items List
+  </button>
+</p>
+<p>
+  <button mat-button routerLink="/dashbord" mat-flat-button color="primary">
+    <i class="fa fa-home" aria-hidden="true"></i>
+    Dashbord
+  </button>
+</p>
 <div class="row">
   <div class="col-md-6">
     <form #f="ngForm" (ngSubmit)="save(f.value)">
@@ -19,7 +29,7 @@
         <div class="form-group">
           <label for="price">Price</label>
           <div class="input-group">
-            <span class="input-group-addon"> <b>R </b> </span>
+            <span class="input-group-addon"></span>
             <input #price="ngModel" [(ngModel)]="foodItem.price" name="price" id="price" type="number" class="form-control" required [min]="0">
           </div>
           <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
@@ -39,11 +49,8 @@
             Category is required.
           </div>
         </div>
-
-
         <app-updload (onUploadFinished)="uploadFinished($event)"></app-updload>
         <button [disabled]="!f.valid" class="btn btn-primary">Save</button>
-        <button *ngIf="foodCategoryId" type="button" (click)="delete()" class="btn btn-danger pull-right">Delete</button>
       </form>
   </div>
   <div class="col-md-4">
