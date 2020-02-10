@@ -3,6 +3,6 @@ export class FoodItem {
   dishName: string;
   foodItemDescription: string;
   price: number;
-  categoryId: string;
-  // image
+  foodCategoryId: string;
+  imagePath: string;
 }

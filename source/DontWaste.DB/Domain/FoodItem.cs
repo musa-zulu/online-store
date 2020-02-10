@@ -15,7 +15,6 @@ namespace DontWaste.DB.Domain
         public Guid FoodCategoryId { get; set; }
         public virtual FoodCategory FoodCategory { get; set; }
 
-        public Guid ImageFileId { get; set; }
-        public virtual ImageFile Image { get; set; }
+        public string ImagePath { get; set; }
     }
 }

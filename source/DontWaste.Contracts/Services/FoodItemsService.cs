@@ -25,14 +25,12 @@ namespace DontWaste.Contracts.Services
             if (paginationFilter == null)
             {
                 return await queryable
-                    .Include(x => x.Image)
                     .Include(x => x.FoodCategory)
                     .ToListAsync();
             }
 
             var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
             return await queryable
-                .Include(x => x.Image)
                 .Include(x => x.FoodCategory)
                 .Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
         }
@@ -66,7 +64,6 @@ namespace DontWaste.Contracts.Services
         public async Task<FoodItem> GetFoodItemByIdAsync(Guid foodItemId)
         {
             return await _dataContext.FoodItems
-                .Include(x => x.Image)
                 .Include(x => x.FoodCategory)
                 .AsNoTracking()
                 .SingleOrDefaultAsync(x => x.FoodItemId == foodItemId);

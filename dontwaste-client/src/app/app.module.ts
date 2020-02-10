@@ -7,15 +7,20 @@ import { CustomFormsModule } from 'ng2-validation';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FoodCategoriesListComponent } from './food-categories/food-categories-list/food-categories-list.component';
+import { FoodCategoriesListComponent } from './dash-bord/food-categories/food-categories-list/food-categories-list.component';
 import { FoodCategoriesService } from './services/food-categories.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 // tslint:disable-next-line: max-line-length
-import { FoodCategoriesFilterComponent } from './food-categories/food-categories-list/food-categories-filter/food-categories-filter.component';
+import { FoodCategoriesFilterComponent } from './dash-bord/food-categories-filter/food-categories-filter.component';
 import { FormsModule } from '@angular/forms';
-import { DialogBoxComponent } from './food-categories/dialog-box/dialog-box.component';
+import { DialogBoxComponent } from './dash-bord/food-categories/dialog-box/dialog-box.component';
+import { DashBordComponent } from './dash-bord/dash-bord.component';
+import { ShoppingCardSummaryComponent } from './dash-bord/shopping-card-summary/shopping-card-summary.component';
+import { FoodItemsComponent } from './dash-bord/food-items/food-items.component';
+import { FoodItemsCardComponent } from './dash-bord/food-items-card/food-items-card.component';
+import { UpdloadComponent } from './dash-bord/food-items/updload/updload.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +29,11 @@ import { DialogBoxComponent } from './food-categories/dialog-box/dialog-box.comp
     NavBarComponent,
     FoodCategoriesFilterComponent,
     DialogBoxComponent,
+    DashBordComponent,
+    ShoppingCardSummaryComponent,
+    FoodItemsComponent,
+    FoodItemsCardComponent,
+    UpdloadComponent
   ],
   imports: [
     FormsModule,

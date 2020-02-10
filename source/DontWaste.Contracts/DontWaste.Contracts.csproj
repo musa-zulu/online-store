@@ -188,7 +188,6 @@
     <Compile Include="V1\Requests\CreateFoodCategoryRequest.cs" />
     <Compile Include="V1\Requests\CreateFoodItemRequest.cs" />
     <Compile Include="V1\Requests\CreateOrderRequest.cs" />
-    <Compile Include="V1\Requests\ImageFileRequest.cs" />
     <Compile Include="V1\Requests\Queries\PaginationQuery.cs" />
     <Compile Include="V1\Requests\UpdateFoodCategoryRequest.cs" />
     <Compile Include="V1\Requests\UpdateFoodItemRequest.cs" />
@@ -197,7 +196,6 @@
     <Compile Include="V1\Responses\ErrorResponse.cs" />
     <Compile Include="V1\Responses\FoodCategoryResponse.cs" />
     <Compile Include="V1\Responses\FoodItemResponse.cs" />
-    <Compile Include="V1\Responses\ImageFileResponse.cs" />
     <Compile Include="V1\Responses\OrderResponse.cs" />
     <Compile Include="V1\Responses\PagedResponse.cs" />
     <Compile Include="V1\Responses\Response.cs" />

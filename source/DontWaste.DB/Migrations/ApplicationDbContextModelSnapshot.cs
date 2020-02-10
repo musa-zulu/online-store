@@ -62,8 +62,8 @@ namespace DontWaste.DB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ImageFileId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("OrderId")
                         .HasColumnType("uniqueidentifier");
@@ -75,35 +75,9 @@ namespace DontWaste.DB.Migrations
 
                     b.HasIndex("FoodCategoryId");
 
-                    b.HasIndex("ImageFileId");
-
                     b.HasIndex("OrderId");
 
                     b.ToTable("FoodItems");
-                });
-
-            modelBuilder.Entity("DontWaste.DB.Domain.ImageFile", b =>
-                {
-                    b.Property<Guid>("ImageFileId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateLastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Image")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("ImageFileId");
-
-                    b.ToTable("ImageFiles");
                 });
 
             modelBuilder.Entity("DontWaste.DB.Domain.Order", b =>
@@ -128,12 +102,6 @@ namespace DontWaste.DB.Migrations
                     b.HasOne("DontWaste.DB.Domain.FoodCategory", "FoodCategory")
                         .WithMany("FoodItems")
                         .HasForeignKey("FoodCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DontWaste.DB.Domain.ImageFile", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageFileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

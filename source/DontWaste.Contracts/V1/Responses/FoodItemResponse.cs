@@ -8,6 +8,6 @@ namespace DontWaste.Contracts.V1.Responses
         public string FoodItemDescription { get; set; }
         public string DishName { get; set; }
         public decimal Price { get; set; }
-        public virtual ImageFileResponse Image { get; set; }
+        public string ImagePath { get; set; }
     }
 }

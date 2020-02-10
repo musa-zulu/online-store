@@ -24,9 +24,10 @@ export class FoodCategoriesService {
           catchError(this.handleError));
   }
 
-  public getFoodCategoryById(getFoodCategoryDto: GetFoodCategoryDto) {
+  public getFoodCategoryById(getFoodCategoryDto: GetFoodCategoryDto): Promise<any> {
     return this.http
-        .post<FoodCategory>(this.serverConfig.getBaseUrl() + this.apiURL + '/', getFoodCategoryDto)
+        .post<FoodCategory>(this.serverConfig.getBaseUrl() + this.apiURL + '/', getFoodCategoryDto.categoryId,
+        this.serverConfig.getRequestOptions())
         .toPromise();
   }
 

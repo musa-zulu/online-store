@@ -32,6 +32,8 @@
             public const string Get = Base + "/foodItems/{itemId}";
 
             public const string Create = Base + "/foodItems";
+            
+            public const string Upload = Base + "/foodItems/Upload";
         }
 
         public static class Orders

@@ -9,14 +9,11 @@ namespace DontWaste.Server.MappingProfile
         public RequestToDomainProfile()
         {
             CreateMap<PaginationQuery, PaginationFilter>();
-            CreateMap<ImageFileRequest, ImageFile>().ReverseMap();
             CreateMap<CreateFoodItemRequest, FoodItem>();
             CreateMap<CreateFoodCategoryRequest, FoodCategory>()
                 .ForMember(dest => dest.FoodItems, opt =>
                     opt.Ignore());
             CreateMap<UpdateFoodItemRequest, FoodItem>()
-                .ForMember(dest => dest.Image, opt =>
-                    opt.MapFrom(src => src.Image))
                 .ForMember(dest => dest.FoodCategory, opt =>
                     opt.MapFrom(src => src.FoodCategory))
                 .ReverseMap();
