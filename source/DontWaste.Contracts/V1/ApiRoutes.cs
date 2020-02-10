@@ -16,7 +16,7 @@
 
             public const string Create = Base + "/foodCategories";
 
-            public const string Update = Base + "/foodCategories/{categoryId}";
+            public const string Update = Base + "/foodCategories";
 
             public const string Delete = Base + "/foodCategories/{categoryId}";
         }
@@ -25,7 +25,7 @@
         {
             public const string GetAll = Base + "/foodItems";
 
-            public const string Update = Base + "/foodItems/{itemId}";
+            public const string Update = Base + "/foodItems";
 
             public const string Delete = Base + "/foodItems/{itemId}";
 
@@ -42,7 +42,7 @@
 
             public const string Create = Base + "/orders";
 
-            public const string Update = Base + "/orders/{orderId}";
+            public const string Update = Base + "/orders";
 
             public const string Delete = Base + "/orders/{orderId}";
         }

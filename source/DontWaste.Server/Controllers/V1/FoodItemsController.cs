@@ -78,9 +78,9 @@ namespace DontWaste.Server.Controllers.V1
         }
 
         [HttpPut(ApiRoutes.FoodItems.Update)]
-        public async Task<IActionResult> Update([FromRoute]Guid itemId, [FromBody] UpdateFoodItemRequest request)
+        public async Task<IActionResult> Update([FromBody] UpdateFoodItemRequest request)
         {
-            if (itemId == Guid.Empty)
+            if (request.FoodItemId == Guid.Empty)
             {
                 return BadRequest(new ErrorResponse(new ErrorModel { Message = "The food item does not exist, or the id is empty." }));
             }
@@ -88,7 +88,7 @@ namespace DontWaste.Server.Controllers.V1
             UpdateBaseFieldsOn(request);
 
             var foodItem = _mapper.Map<UpdateFoodItemRequest, FoodItem>(request);
-            foodItem.FoodItemId = itemId;
+            foodItem.FoodItemId = request.FoodItemId;
             
             var isUpdated = await _foodItemsService.UpdateFoodItemAsync(foodItem);
 

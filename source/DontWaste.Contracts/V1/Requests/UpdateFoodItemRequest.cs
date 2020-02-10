@@ -4,6 +4,7 @@ namespace DontWaste.Contracts.V1.Requests
 {
     public class UpdateFoodItemRequest
     {
+        public Guid FoodItemId { get; set; }
         public string FoodItemDescription { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? DateLastModified { get; set; }

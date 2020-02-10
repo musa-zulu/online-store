@@ -79,9 +79,9 @@ namespace DontWaste.Server.Controllers.V1
         }
 
         [HttpPut(ApiRoutes.FoodCategories.Update)]
-        public async Task<IActionResult> Update([FromRoute]Guid categoryId, [FromBody] UpdateFoodCategoryRequest request)
+        public async Task<IActionResult> Update([FromBody] UpdateFoodCategoryRequest request)
         {
-            if (categoryId == Guid.Empty)
+            if (request.FoodCategoryId == Guid.Empty)
             {
                 return BadRequest(new ErrorResponse(new ErrorModel { Message = "The food category does not exist, or the id is empty." }));
             }
@@ -89,7 +89,7 @@ namespace DontWaste.Server.Controllers.V1
             UpdateBaseFieldsOn(request);
             
             var foodCategory = _mapper.Map<UpdateFoodCategoryRequest, FoodCategory>(request);
-            foodCategory.FoodCategoryId = categoryId;
+            foodCategory.FoodCategoryId = request.FoodCategoryId;
             
             var isUpdated = await _foodCategoryService.UpdateFoodCategoryAsync(foodCategory);
 

@@ -20,7 +20,6 @@ namespace DontWaste.Server
         }
 
         public IConfiguration Configuration { get; }
-        public IApplicationBuilder App { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -28,6 +27,7 @@ namespace DontWaste.Server
             services.InstallServicesInAssembly(Configuration);
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +50,9 @@ namespace DontWaste.Server
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+
+            app.UseCors(options =>
+                options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseMvc();
 

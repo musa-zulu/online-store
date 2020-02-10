@@ -79,9 +79,9 @@ namespace DontWaste.Server.Controllers.V1
         }
 
         [HttpPut(ApiRoutes.Orders.Update)]
-        public async Task<IActionResult> Update([FromRoute]Guid orderId, [FromBody] UpdateOrderRequest request)
+        public async Task<IActionResult> Update([FromBody] UpdateOrderRequest request)
         {
-            if (orderId == Guid.Empty)
+            if (request.OrderId == Guid.Empty)
             {
                 return BadRequest(new ErrorResponse(new ErrorModel { Message = "The order does not exist, or the id is empty." }));
             }
@@ -89,7 +89,7 @@ namespace DontWaste.Server.Controllers.V1
             UpdateBaseFieldsOn(request);
 
             var order = _mapper.Map<UpdateOrderRequest, Order>(request);
-            order.OrderId = orderId;
+            order.OrderId = request.OrderId;
 
             var isUpdated = await _orderService.UpdateOrderAsync(order);
 
