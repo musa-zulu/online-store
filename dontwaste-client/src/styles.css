@@ -8,22 +8,22 @@ h1, h2, h3 {
 }
 
 .navbar {
-  border-bottom: 3px solid #e7e7e7;
+  border-bottom: 3px solid #cf5151;
 }
 
 .navbar-light .navbar-brand {
-  color: #c1d62e;
+  color: #d6342e;
 }
 
 .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
-  color: #c1d62e;
+  color: #da4315;
 }
 
 .list-group-item.active {
-  background-color: #c1d62e;
-  border-color: #c1d62e;
+  background-color: #0030b3;
+  border-color: #0030b3;
 }
 
 .form-control:focus {
-  border-color: #c1d62e;
+  border-color: #0030b3;
 }
