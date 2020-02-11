@@ -30,6 +30,7 @@ import { CheckoutComponent } from './dash-bord/checkout/checkout.component';
 import { OrdersComponent } from './dash-bord/orders/orders.component';
 import { OrdersService } from './services/orders.service';
 import { ShoppingCartComponent } from './dash-bord/shopping-cart/shopping-cart.component';
+import { ItemSelectionComponent } from './dash-bord/item-selection/item-selection.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ShoppingCartComponent } from './dash-bord/shopping-cart/shopping-cart.c
     FoodItemQuatityComponent,
     CheckoutComponent,
     OrdersComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ItemSelectionComponent
   ],
   imports: [
     FormsModule,

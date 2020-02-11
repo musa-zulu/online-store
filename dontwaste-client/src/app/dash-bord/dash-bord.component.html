@@ -1,19 +1,28 @@
+<div class="row" style="max-width: 100%;">
 
-<div class="row">
   <div class="col-3">
-    <app-food-categories-filter [foodCategory]="foodCategory"></app-food-categories-filter>
+    <button class="btn btn-outline-primary btn-block"
+            [class.active]="currentCategory === null"
+            (click)="setCurrentCategory(null)">
+        All Categories
+    </button>
+    <button *ngFor="let category of categories"
+            class="btn btn-outline-primary btn-block"
+            [class.active]="currentCategory === category.foodCategoryId"
+            (click)="setCurrentCategory(category.foodCategoryId)" style="max-width: 100%;">
+        {{category.description}}
+    </button>
   </div>
   <div class="col">
-    <div class="row" *ngIf="cart$ | async as cart">
+    <div class="row" *ngIf="!cart"> <!--fix this-->
         <ng-container *ngFor="let item of filteredFoodItems; let i = index">
           <div class="col">
-             <app-food-items-card [foodItem]="item" [shopping-cart]="cart"></app-food-items-card>
+            <app-food-items-card [foodItem]="item" [shopping-cart]="cart"></app-food-items-card>
           </div>
           <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
         </ng-container>
-      </div>
+    </div>
   </div>
-
   <div class="col-3">
     <app-shopping-card-summary ></app-shopping-card-summary>
   </div>
