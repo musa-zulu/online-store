@@ -5,4 +5,6 @@ export class FoodItem {
   price: number;
   foodCategoryId: string;
   imagePath: string;
+  shoppingCartId: string;
+  quantity: number;
 }

@@ -1,15 +1,14 @@
 <div *ngIf="foodItem.dishName" class="card">
   <div class="card-body">
     <h4 class="card-title">{{ foodItem.dishName }}</h4>
-    <p class="card-text">{{ foodItem.price | currency:'ZAR':true }}</p>
+    <h6 class="card-text">{{ foodItem.price | currency:'ZAR ':true }}</h6>
   </div>
-  <div *ngIf="showActions && shoppingCart" class="card-footer">
+  <div *ngIf="showActions" class="card-footer">
     <button
-      *ngIf="shoppingCart.getQuantity(foodItem) === 0; else updateQuantity"
       (click)="addToCart()"
       class="btn btn-secondary btn-block">Add to Cart</button>
     <ng-template #updateQuantity>
-      <app-food-item-quatity [foodItem]="foodItem" [shopping-cart]="shoppingCart">
+      <app-food-item-quatity [item]="foodItem" [shopping-cart]="shoppingCart">
       </app-food-item-quatity>
     </ng-template>
   </div>

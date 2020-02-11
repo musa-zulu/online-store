@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from 'src/app/services/orders.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
   selector: 'app-orders',
@@ -8,11 +8,11 @@ import { OrdersService } from 'src/app/services/orders.service';
 })
 export class OrdersComponent {
   orders$;
-  constructor(private orderService: OrdersService) {
+  constructor(private shoppingCartService: ShoppingCartService) {
     this.orders$ = this.getOrders();
   }
 
   private getOrders() {
-    return this.orderService.getOrders();
+    //return this.shoppingCartService.getCart();
   }
 }

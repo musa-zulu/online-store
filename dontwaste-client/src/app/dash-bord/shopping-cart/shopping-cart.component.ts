@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { ShoppingCart } from 'src/app/models/shopping-cart';
+import { FoodItem } from 'src/app/models/food-item';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,14 +8,22 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  cart$;
-  constructor(private shoppingCartService: ShoppingCartService) { }
+  cart: ShoppingCart[] = [];
+  cartItems: FoodItem[] = [];
+  totalCount: number;
+  totalPrice;
+  constructor() { }
+  shoppingCart = new ShoppingCart();
 
-  async ngOnInit() {
-    this.cart$ = this.shoppingCartService.getCart() || [];
+  ngOnInit() {
+    this.cartItems = ShoppingCart.getShoppingCart();
+    this.totalPrice = ShoppingCart.totalPrice(this.cartItems);
+    this.totalCount = this.shoppingCart.getTotalCount();
   }
 
   clearCart() {
-    this.shoppingCartService.clearCart();
+    localStorage.clear();
+    this.totalCount = 0;
+    this.cart = [];
   }
 }

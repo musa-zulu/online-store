@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodItem } from '../models/food-item';
-import { Observable, timer } from 'rxjs';
+import { timer } from 'rxjs';
 import { ShoppingCart } from '../models/shopping-cart';
-import { ActivatedRoute } from '@angular/router';
-import { ShoppingCartService } from '../services/shopping-cart.service';
-import { FoodItemsService } from '../services/food-items.service';
 import { FoodCategoriesService } from '../services/food-categories.service';
 import { FoodCategory } from '../models/food-category';
 import { switchMap } from 'rxjs/operators';
@@ -15,56 +12,21 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./dash-bord.component.css']
 })
 export class DashBordComponent implements OnInit {
-  constructor(private route: ActivatedRoute,
-              private foodItemService: FoodItemsService,
-              private shoppingCartService: ShoppingCartService,
-              private foodCategoriesService: FoodCategoriesService) { }
   static readonly POLLING_INTERVAL = 10000;
-  /*foodItems: FoodItem[] = [];
-  filteredFoodItems: FoodItem[] = [];
-  foodCategory: FoodItem;
-  cart$: Observable<ShoppingCart>;
-
-  constructor(
-    private route: ActivatedRoute,
-    private foodItemService: FoodItemsService,
-    private shoppingCartService: ShoppingCartService
-  ) {
-  }
-
-  async ngOnInit() {
-    this.cart$ = await this.shoppingCartService.getCart();
-    this.populateProducts();
-  }
-
-  private populateProducts() {
-    this.foodItemService
-      .getFoodItems()
-      .map(foodItems => {
-        this.foodItems = foodItems;
-        return this.route.queryParamMap;
-      })
-      .subscribe(params => {
-        //this.foodCategory = params.get('category');
-        this.applyFilter();
-      });
-  }
-
-  private applyFilter() {
-    this.filteredFoodItems = (this.foodCategory) ?
-    this.foodItems.filter(p => p.foodCategoryId === this.foodCategory.foodCategoryId) :
-    this.foodItems;
-  }*/
+  cart: FoodItem[];
   currentCategory: string;
   categories: FoodCategory[];
   foodItems: FoodItem[] = [];
   filteredFoodItems: FoodItem[] = [];
-  cart: ShoppingCart;
+  foodCategory: FoodCategory;
 
-  async ngOnInit() {
-    this.getCart();
+  constructor(private foodCategoriesService: FoodCategoriesService) {
+              }
+
+  ngOnInit() {
     this.getAllCategories();
-    this.setCurrentCategory(null);
+    this.cart = this.getCart();
+    this.filteredFoodItems = this.foodItems;
   }
 
   getCategories() {
@@ -81,10 +43,7 @@ export class DashBordComponent implements OnInit {
   }
 
   getCart() {
-    this.shoppingCartService.getCart().subscribe((cart) => {
-      this.cart = cart;
-      console.log();
-    });
+    return ShoppingCart.getShoppingCart();
   }
 
   private getAllCategories() {
@@ -100,14 +59,15 @@ export class DashBordComponent implements OnInit {
     if (foodCategoryId !== null) {
       category = this.categories.filter(x => x.foodCategoryId === foodCategoryId);
       this.foodItems = category[0].foodItems;
-      this.filteredFoodItems = this.foodItems;
     } else {
       this.categories.forEach(cItem => {
         cItem.foodItems.forEach(item => {
-          this.foodItems.push(item);
+          if (this.foodItems.indexOf(item) === -1) {
+            this.foodItems.push(item);
+          }
         });
       });
-      this.filteredFoodItems = this.foodItems;
     }
+    this.filteredFoodItems = this.foodItems;
   }
 }

@@ -1,14 +1,15 @@
-<p>
-  <button mat-button routerLink="/foodItems" mat-flat-button color="primary" >
-    Food Items List
-  </button>
-</p>
-<p>
-  <button mat-button routerLink="/dashbord" mat-flat-button color="primary">
+<p><b>Add Food Item</b></p>
+<div style="display:inline-block; margin-bottom: 20px; ">
+  <button mat-button routerLink="/dashbord" mat-flat-button color="primary" >
     <i class="fa fa-home" aria-hidden="true"></i>
     Dashbord
   </button>
-</p>
+
+  <button mat-button routerLink="/foodItems" mat-flat-button color="primary" style="margin-left: 20px;">
+     Food Items List
+  </button>
+</div>
+
 <div class="row">
   <div class="col-md-6">
     <form #f="ngForm" (ngSubmit)="save(f.value)">

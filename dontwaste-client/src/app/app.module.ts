@@ -28,9 +28,7 @@ import { ShoppingCartService } from './services/shopping-cart.service';
 import { FoodItemQuatityComponent } from './dash-bord/food-item-quatity/food-item-quatity.component';
 import { CheckoutComponent } from './dash-bord/checkout/checkout.component';
 import { OrdersComponent } from './dash-bord/orders/orders.component';
-import { OrdersService } from './services/orders.service';
 import { ShoppingCartComponent } from './dash-bord/shopping-cart/shopping-cart.component';
-import { ItemSelectionComponent } from './dash-bord/item-selection/item-selection.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +48,6 @@ import { ItemSelectionComponent } from './dash-bord/item-selection/item-selectio
     CheckoutComponent,
     OrdersComponent,
     ShoppingCartComponent,
-    ItemSelectionComponent
   ],
   imports: [
     FormsModule,
@@ -75,8 +72,7 @@ import { ItemSelectionComponent } from './dash-bord/item-selection/item-selectio
   providers: [FoodCategoriesService,
     ConfirmationDialogComponent,
      FoodItemsService,
-     ShoppingCartService,
-     OrdersService],
+     ShoppingCartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

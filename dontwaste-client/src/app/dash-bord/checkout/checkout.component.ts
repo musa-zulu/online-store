@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  cart$: Observable<ShoppingCart>;
+  cart$;
 
   constructor(private shoppingCartService: ShoppingCartService) {}
 
   async ngOnInit() {
-    this.cart$ = await this.shoppingCartService.getCart();
+   // this.cart$ = await this.shoppingCartService.getCart();
   }
 }

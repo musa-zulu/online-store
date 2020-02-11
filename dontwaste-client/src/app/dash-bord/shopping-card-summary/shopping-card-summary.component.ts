@@ -8,5 +8,14 @@ import { ShoppingCart } from 'src/app/models/shopping-cart';
 })
 export class ShoppingCardSummaryComponent {
   // tslint:disable-next-line: no-input-rename
-  @Input('cart') cart: ShoppingCart;
+  cart: ShoppingCart = new ShoppingCart();
+
+  get itemsCount() {
+    return localStorage.length;
+  }
+
+  get getCart() {
+    return this.cart.items;
+  }
+
 }

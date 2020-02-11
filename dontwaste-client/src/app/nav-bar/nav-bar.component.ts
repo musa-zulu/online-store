@@ -10,17 +10,9 @@ import { ShoppingCart } from '../models/shopping-cart';
 })
 export class NavBarComponent implements OnInit {
 
-  cart$: Observable<ShoppingCart>;
-
+  cart: ShoppingCart;
   constructor(private shoppingCartService: ShoppingCartService) {
   }
-
   async ngOnInit() {
-    this.shoppingCart();
   }
-
-  async shoppingCart()  {
-    this.cart$ = await this.shoppingCartService.getCart();
-  }
-
 }
