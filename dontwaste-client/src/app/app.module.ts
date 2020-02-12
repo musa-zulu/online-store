@@ -23,7 +23,6 @@ import { FoodItemsListComponent } from './dash-bord/food-items/food-items-list/f
 import { ConfirmationDialogComponent } from './dash-bord/confirmation-dialog/confirmation-dialog.component';
 import { FoodItemsService } from './services/food-items.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
-import { FoodItemQuatityComponent } from './dash-bord/food-item-quatity/food-item-quatity.component';
 import { OrdersComponent } from './dash-bord/orders/orders.component';
 import { ShoppingCartComponent } from './dash-bord/shopping-cart/shopping-cart.component';
 
@@ -40,7 +39,6 @@ import { ShoppingCartComponent } from './dash-bord/shopping-cart/shopping-cart.c
     FoodItemsCardComponent,
     FoodItemsListComponent,
     ConfirmationDialogComponent,
-    FoodItemQuatityComponent,
     OrdersComponent,
     ShoppingCartComponent,
   ],

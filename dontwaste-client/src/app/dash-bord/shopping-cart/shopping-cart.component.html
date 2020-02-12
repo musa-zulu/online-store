@@ -24,7 +24,21 @@
           {{ item.dishName }}
         </td>
         <td>
-        <app-food-item-quatity [item]="item"></app-food-item-quatity>
+        <div class="row no-gutters">
+          <div class="col-2">
+            <button
+              (click)="removeFromCart(item)"
+              class="btn btn-secondary btn-block">-</button>
+          </div>
+          <div class="col text-center quantity">
+            {{ item.quantity }} in cart
+          </div>
+          <div class="col-2">
+            <button
+              (click)="addToCart(item)"
+              class="btn btn-secondary btn-block">+</button>
+          </div>
+        </div>
         </td>
         <td class="text-right">
           {{ item.price * item.quantity  | currency:'ZAR ':true }}

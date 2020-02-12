@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCart } from 'src/app/models/shopping-cart';
 import { FoodItem } from 'src/app/models/food-item';
-import { timer } from 'rxjs/internal/observable/timer';
-import { switchMap } from 'rxjs/operators';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { Order } from 'src/app/models/order';
-import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 
@@ -70,6 +67,14 @@ export class ShoppingCartComponent implements OnInit {
       console.log('User confirmed:', confirmed);
     })
     .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+  }
+
+  addToCart(foodItem: FoodItem) {
+    this.shoppingCart.updateCart(foodItem);
+  }
+
+  removeFromCart(foodItem: FoodItem) {
+    this.shoppingCart.removeFromCart(foodItem);
   }
 
   pupulateItemsInCart() {
