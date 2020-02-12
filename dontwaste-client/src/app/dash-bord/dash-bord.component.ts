@@ -12,8 +12,8 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./dash-bord.component.css']
 })
 export class DashBordComponent implements OnInit {
-  static readonly POLLING_INTERVAL = 10000;
-  cart: FoodItem[];
+  static readonly POLLING_INTERVAL = 1000;
+  cartItems: FoodItem[];
   currentCategory: string;
   categories: FoodCategory[];
   foodItems: FoodItem[] = [];
@@ -26,7 +26,7 @@ export class DashBordComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.cart = this.getCart();
+    this.cartItems = this.getCart();
     this.setCurrentCategory(null);
     this.filteredFoodItems = this.foodItems;
   }

@@ -54,7 +54,7 @@ export class FoodItemsComponent implements OnInit {
       this.foodItemService.addFoodItem(foodItem);
     }
 
-    this.router.navigate(['foodItems']);
+    this.router.navigate(['/foodItems']);
   }
 
   ngOnInit() {

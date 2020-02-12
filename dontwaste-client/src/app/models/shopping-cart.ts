@@ -40,15 +40,6 @@ export class ShoppingCart {
     return cart;
   }
 
- static getQuantity(foodItem: FoodItem) {
-
-    return this.getShoppingCart()
-    .filter(x => x.foodItemDescription.toLocaleLowerCase() === foodItem.foodItemDescription.toLocaleLowerCase())
-    .map(m => m.quantity ? 1 : 0 as number)
-    .reduce((count, m) => count + m, 0);
-
-  }
-
   updateCart(item: FoodItem) {
     const cart = ShoppingCart.getShoppingCart();
     const length = localStorage.length;
@@ -98,14 +89,16 @@ export class ShoppingCart {
   }
 
   removeFromCart(foodItem: FoodItem) {
-    this.updateLocalStorage(foodItem);
+    this.updateLocalStorage(foodItem, true);
   }
 
-  updateLocalStorage(item: FoodItem) {
+  updateLocalStorage(item: FoodItem, removeItem = false) {
     localStorage.removeItem(item.key);
-    item.quantity += 1;
+    removeItem ? item.quantity -= 1 : item.quantity += 1;
     item.totalPrice = (item.price * item.quantity);
     this.setValuesOn(item);
-    localStorage.setItem(item.key, JSON.stringify(this.items));
+    if (item.quantity > 0 && item.totalPrice > 0) {
+      localStorage.setItem(item.key, JSON.stringify(this.items));
+    }
   }
 }

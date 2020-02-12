@@ -27,7 +27,7 @@ namespace DontWaste.Contracts.Services
             }
 
             var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
-            return await queryable.Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
+            return await queryable.Skip(skip).Take(paginationFilter.PageSize).OrderBy(o => o.OrderNumber).ToListAsync();
         }
 
         public async Task<bool> CreateOrderAsync(Order order)

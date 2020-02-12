@@ -1,12 +1,10 @@
-import { Component, OnInit, Optional, Inject } from '@angular/core';
+import { Component, Optional, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FoodCategory } from 'src/app/models/food-category';
-import { FoodCategoriesListComponent } from '../food-categories-list/food-categories-list.component';
 
 @Component({
   selector: 'app-dialog-box',
   templateUrl: './dialog-box.component.html',
-  styleUrls: ['./dialog-box.component.css']
 })
 export class DialogBoxComponent {
 

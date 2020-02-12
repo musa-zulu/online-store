@@ -6,6 +6,8 @@ import { switchMap } from 'rxjs/operators';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { Order } from 'src/app/models/order';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -13,31 +15,30 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  static readonly POLLING_INTERVAL = 3000;
-  //cart: ShoppingCart[] = [];
+  static readonly POLLING_INTERVAL = 1000;
   cartItems: FoodItem[] = [];
   totalCount: number;
   totalPrice;
   shoppingCart = new ShoppingCart();
-  cart: FoodItem[] = [];
 
-  constructor(private shoppingCartService: ShoppingCartService) {
-    setInterval(() => { this.getTotalPrice(); }, 1000);
-    setInterval(() => { this.getTotalCount(); }, 1000);
-    setInterval(() => { this.getTotalCount(); }, 1000);
+  constructor(private shoppingCartService: ShoppingCartService,
+              private router: Router,
+              private confirmationDialogService: ConfirmationDialogService) {
+    setInterval(() => { this.getTotalPrice(); }, ShoppingCartComponent.POLLING_INTERVAL);
+    setInterval(() => { this.getTotalCount(); }, ShoppingCartComponent.POLLING_INTERVAL);
+    setInterval(() => { this.getCartItems(); }, ShoppingCartComponent.POLLING_INTERVAL);
   }
 
   ngOnInit() {
-    this.cartItems = ShoppingCart.getShoppingCart();
+    this.getCartItems();
     this.getTotalPrice();
     this.totalCount = this.shoppingCart.getTotalCount();
-    this.getCartItems();
   }
 
   clearCart() {
     localStorage.clear();
     this.totalCount = 0;
-    this.cart = [];
+    this.cartItems = [];
   }
 
   getTotalPrice() {
@@ -51,12 +52,24 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   checkOut() {
-    this.shoppingCartService.saveOrder(this.pupulateItemsInCart());
+    this.openConfirmationDialog();
   }
 
   getCartItems() {
-    this.cart = ShoppingCart.getShoppingCart();
-    return this.cart;
+    this.cartItems = ShoppingCart.getShoppingCart();
+    return this.cartItems;
+  }
+
+  openConfirmationDialog() {
+    this.confirmationDialogService.confirm('Please confirm..', 'Do you really want to place this order... ?')
+    .then((confirmed) => {
+      if (confirmed) {
+        this.shoppingCartService.saveOrder(this.pupulateItemsInCart());
+        this.router.navigate(['/orders']);
+      }
+      console.log('User confirmed:', confirmed);
+    })
+    .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   }
 
   pupulateItemsInCart() {

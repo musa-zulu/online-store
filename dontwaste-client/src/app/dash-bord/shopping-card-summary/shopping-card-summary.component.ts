@@ -8,33 +8,34 @@ import { FoodItem } from 'src/app/models/food-item';
   styleUrls: ['./shopping-card-summary.component.css']
 })
 export class ShoppingCardSummaryComponent {
-  cart: FoodItem[] = [];
+  static readonly POLLING_INTERVAL = 1000;
+  cartItems: FoodItem[] = [];
   totalPrice;
   shoppingCart = new ShoppingCart();
 
   constructor() {
-    setInterval(() => { this.getTotalPrice(); }, 1000);
-    setInterval(() => { this.itemsCount(); }, 1000);
-    setInterval(() => { this.getCart(); }, 1000);
-    this.cart = ShoppingCart.getShoppingCart();
+    setInterval(() => { this.getTotalPrice(); }, ShoppingCardSummaryComponent.POLLING_INTERVAL);
+    setInterval(() => { this.itemsCount(); }, ShoppingCardSummaryComponent.POLLING_INTERVAL);
+    setInterval(() => { this.getCart(); }, ShoppingCardSummaryComponent.POLLING_INTERVAL);
+    this.cartItems = ShoppingCart.getShoppingCart();
   }
 
   itemsCount() {
     let count = 0;
-    this.cart.forEach(el => {
+    this.cartItems.forEach(el => {
       count += el.quantity;
     });
     return count;
   }
 
   getCart() {
-    this.cart = ShoppingCart.getShoppingCart();
-    return this.cart;
+    this.cartItems = ShoppingCart.getShoppingCart();
+    return this.cartItems;
   }
 
   getTotalPrice() {
    let price = 0;
-   this.cart.forEach(element => {
+   this.cartItems.forEach(element => {
       price += element.totalPrice;
     });
    return price;

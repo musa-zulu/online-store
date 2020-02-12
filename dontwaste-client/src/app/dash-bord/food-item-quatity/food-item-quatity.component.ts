@@ -11,12 +11,21 @@ export class FoodItemQuatityComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input('item') foodItem: FoodItem;
   // tslint:disable-next-line: no-input-rename
-  shoppingCart = new ShoppingCart();
-  cart: FoodItem[] = [];
+  shoppingCart;
+  cartItems: FoodItem[] = [];
   totalCount;
+  currentCartItems;
 
   constructor() {
     this.totalCount = this.getQuantity;
+    setInterval(() => { this.getCartItems(); }, 1000);
+
+    this.currentCartItems = this.shoppingCart;
+  }
+
+  getCartItems() {
+    this.cartItems = ShoppingCart.getShoppingCart();
+    return this.cartItems;
   }
 
   addToCart() {
@@ -29,19 +38,16 @@ export class FoodItemQuatityComponent implements OnInit {
     this.totalCount = this.getQuantity;
   }
 
-  getUpdatedQuantity() {
-      return ShoppingCart.getQuantity(this.foodItem);
-  }
-
   getQuantity() {
     let count = 0;
-    this.cart.forEach(el => {
+    this.shoppingCart.items.forEach(el => {
       count += el.quantity;
     });
     return count;
   }
 
   ngOnInit(): void {
+    this.shoppingCart = new ShoppingCart();
   }
 
 }

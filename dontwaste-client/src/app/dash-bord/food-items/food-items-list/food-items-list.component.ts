@@ -5,7 +5,6 @@ import { FoodItemsService } from 'src/app/services/food-items.service';
 import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 import { switchMap } from 'rxjs/operators';
 import { timer } from 'rxjs/internal/observable/timer';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-food-items-list',

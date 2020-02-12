@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of cart">
+      <tr *ngFor="let item of cartItems">
         <td>
           {{ item.dishName }}
         </td>
@@ -39,7 +39,7 @@
       </tr>
       <tr>
         <th colspan="4">
-          <button *ngIf="cart.length" (click)="checkOut()" class="btn btn-success">Check Out</button>
+          <button *ngIf="cartItems.length" (click)="checkOut()" class="btn btn-success">Check Out</button>
         </th>
       </tr>
     </tfoot>
