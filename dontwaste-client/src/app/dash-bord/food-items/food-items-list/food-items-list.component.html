@@ -9,13 +9,6 @@
   </button>
 </div>
 
-<p>
-  <input
-    #query
-    (keyup)="filter(query.value)"
-    type="text" class="form-control" placeholder="Search...">
-</p>
-
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="tableDataResource">
     <!-- DishName Column -->
