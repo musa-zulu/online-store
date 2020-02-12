@@ -4,21 +4,21 @@
     <a class="nav-link" routerLink="/shopping-cart">
       <i class="fa fa-shopping-cart" aria-hidden="true"></i>
       <span class="badge badge-warning badge-pill">
-        {{ itemsCount || 0}}
+        {{ itemsCount() || 0}}
       </span>
     </a>
- <p class="card-text">You have {{ itemsCount || 0 }} items in your shopping cart.</p>
+ <p class="card-text">You have {{ itemsCount() || 0 }} items in your shopping cart.</p>
     <ul class="list-group list-group-flush">
-      <!--<li *ngFor="let item of cart" class="list-group-item">
+      <li *ngFor="let item of cart" class="list-group-item">
         {{ item.quantity }} x {{ item.dishName }}
         <div class="float-right">
-          {{ cart.totalPrice | currency:'ZAR':true }}
+          {{ item.price | currency:'ZAR':true }}
         </div>
-      </li>-->
+      </li>
       <li class="list-group-item font-weight-bold">
         Total
         <div class="float-right">
-          {{ cart.totalPrice | currency:'ZAR ':true }}
+          {{ getTotalPrice() | currency:'ZAR ':true }}
         </div>
       </li>
     </ul>

@@ -1,6 +1,7 @@
 <div *ngIf="foodItem.dishName" class="card">
   <div class="card-body">
     <h4 class="card-title">{{ foodItem.dishName }}</h4>
+    <h6 class="card-text">{{ foodItem.foodItemDescription }}</h6>
     <h6 class="card-text">{{ foodItem.price | currency:'ZAR ':true }}</h6>
   </div>
   <div *ngIf="showActions" class="card-footer">
@@ -8,7 +9,7 @@
       (click)="addToCart()"
       class="btn btn-secondary btn-block">Add to Cart</button>
     <ng-template #updateQuantity>
-      <app-food-item-quatity [item]="foodItem" [shopping-cart]="shoppingCart">
+      <app-food-item-quatity [item]="foodItem">
       </app-food-item-quatity>
     </ng-template>
   </div>

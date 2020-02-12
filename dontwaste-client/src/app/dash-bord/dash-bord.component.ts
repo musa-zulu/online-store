@@ -21,11 +21,13 @@ export class DashBordComponent implements OnInit {
   foodCategory: FoodCategory;
 
   constructor(private foodCategoriesService: FoodCategoriesService) {
-              }
+    this.getCategories();
+    this.setCurrentCategory(null);
+  }
 
-  ngOnInit() {
-    this.getAllCategories();
+  async ngOnInit() {
     this.cart = this.getCart();
+    this.setCurrentCategory(null);
     this.filteredFoodItems = this.foodItems;
   }
 
@@ -46,11 +48,11 @@ export class DashBordComponent implements OnInit {
     return ShoppingCart.getShoppingCart();
   }
 
-  private getAllCategories() {
+  private async getAllCategories() {
     this.getCategories()
-    .subscribe((foodCategories) => {
-      this.categories = foodCategories.data;
-      console.log();
+    .subscribe(async (foodCategories) => {
+       this.categories = await foodCategories.data;
+       console.log();
     });
   }
 
@@ -60,7 +62,7 @@ export class DashBordComponent implements OnInit {
       category = this.categories.filter(x => x.foodCategoryId === foodCategoryId);
       this.foodItems = category[0].foodItems;
     } else {
-      this.categories.forEach(cItem => {
+      (this.categories || []).forEach(cItem => {
         cItem.foodItems.forEach(item => {
           if (this.foodItems.indexOf(item) === -1) {
             this.foodItems.push(item);

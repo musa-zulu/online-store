@@ -28,8 +28,4 @@
     <ProjectReference Include="..\DontWaste.DB\DontWaste.DB.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Resources\Images\" />
-  </ItemGroup>
-
 </Project>

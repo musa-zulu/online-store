@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FoodItemsService } from 'src/app/services/food-items.service';
 import 'rxjs/add/operator/take';
 import { FoodItem } from 'src/app/models/food-item';
-import { FormControl } from '@angular/forms';
 import { timer } from 'rxjs/internal/observable/timer';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 
@@ -18,7 +17,6 @@ export class FoodItemsComponent implements OnInit {
   categories$;
   foodItem: FoodItem = new FoodItem();
   foodItemId;
-  public response: {dbPath: ''};
 
   constructor(
     private router: Router,
@@ -50,7 +48,6 @@ export class FoodItemsComponent implements OnInit {
   }
 
   save(foodItem) {
-    foodItem.imagePath = this.response.dbPath;
     if (foodItem.foodItemId) {
        this.foodItemService.updateFoodItem(foodItem);
     } else {
@@ -62,9 +59,4 @@ export class FoodItemsComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  public uploadFinished = (event) => {
-    this.response = event;
-  }
-
 }

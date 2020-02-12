@@ -5,12 +5,11 @@ export class ShoppingCartItem {
   foodItemDescription: string;
   price: number;
   foodCategoryId: string;
-  imagePath: string;
   quantity: number;
+  key: string;
+  totalPrice: number;
 
   constructor(init?: Partial<ShoppingCartItem>) {
     Object.assign(this, init);
   }
-
-  get totalPrice() { return this.price * this.quantity; }
 }

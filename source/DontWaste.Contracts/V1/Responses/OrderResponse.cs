@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DontWaste.Contracts.V1.Responses
 {
@@ -10,10 +9,8 @@ namespace DontWaste.Contracts.V1.Responses
 
         public virtual List<FoodItemResponse> FoodItems { get; set; } = new List<FoodItemResponse>();
 
-        public decimal TotalPrice => GetTotalPrice();
-
-        public decimal GetTotalPrice() => FoodItems.Sum(p => p.Price);
-
-        public string GetFormattedTotalPrice() => GetTotalPrice().ToString("0.00");
+        public decimal TotalPrice { get; set; }
+        public int OrderNumber { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

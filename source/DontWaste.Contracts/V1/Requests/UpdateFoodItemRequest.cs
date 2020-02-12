@@ -8,8 +8,6 @@ namespace DontWaste.Contracts.V1.Requests
         public string FoodItemDescription { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? DateLastModified { get; set; }
-        public string ImagePath { get; set; }
-
         public Guid FoodCategoryId { get; set; }
         public virtual UpdateFoodCategoryRequest FoodCategory { get; set; }
     }

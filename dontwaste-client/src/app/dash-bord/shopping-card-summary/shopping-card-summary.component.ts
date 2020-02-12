@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ShoppingCart } from 'src/app/models/shopping-cart';
+import { FoodItem } from 'src/app/models/food-item';
 
 @Component({
   selector: 'app-shopping-card-summary',
@@ -7,15 +8,36 @@ import { ShoppingCart } from 'src/app/models/shopping-cart';
   styleUrls: ['./shopping-card-summary.component.css']
 })
 export class ShoppingCardSummaryComponent {
-  // tslint:disable-next-line: no-input-rename
-  cart: ShoppingCart = new ShoppingCart();
+  cart: FoodItem[] = [];
+  totalPrice;
+  shoppingCart = new ShoppingCart();
 
-  get itemsCount() {
-    return localStorage.length;
+  constructor() {
+    setInterval(() => { this.getTotalPrice(); }, 1000);
+    setInterval(() => { this.itemsCount(); }, 1000);
+    setInterval(() => { this.getCart(); }, 1000);
+    this.cart = ShoppingCart.getShoppingCart();
   }
 
-  get getCart() {
-    return this.cart.items;
+  itemsCount() {
+    let count = 0;
+    this.cart.forEach(el => {
+      count += el.quantity;
+    });
+    return count;
+  }
+
+  getCart() {
+    this.cart = ShoppingCart.getShoppingCart();
+    return this.cart;
+  }
+
+  getTotalPrice() {
+   let price = 0;
+   this.cart.forEach(element => {
+      price += element.totalPrice;
+    });
+   return price;
   }
 
 }

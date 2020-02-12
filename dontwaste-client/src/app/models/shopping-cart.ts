@@ -4,7 +4,6 @@ import { FoodItem } from './food-item';
 export class ShoppingCart {
   constructor() {
   }
-
   private static storageName = 'CartItem';
   items: ShoppingCartItem[] = [];
   cartId: string;
@@ -23,18 +22,18 @@ export class ShoppingCart {
     if (length > 0) {
       for (let i = 0; i <= length; i++) {
         if (localStorage.getItem(this.storageName + i) !== null) {
-          const obj = JSON.parse(localStorage.getItem(this.storageName + i));
-
-          cart.push({
-            dishName: obj[0].dishName,
-            foodCategoryId: obj[0].foodCategoryId,
-            foodItemDescription: obj[0].foodItemDescription,
-            imagePath: obj[0].imageUrl,
-            foodItemId: obj[0].foodItemId,
-            price: obj[0].price,
-            quantity: obj[0].quantity,
-            shoppingCartId: obj[0].shoppingCartId
-          });
+            const obj = JSON.parse(localStorage.getItem(this.storageName + i));
+            cart.push({
+                dishName: obj[0].dishName,
+                foodCategoryId: obj[0].foodCategoryId,
+                foodItemDescription: obj[0].foodItemDescription,
+                foodItemId: obj[0].foodItemId,
+                price: obj[0].price,
+                quantity: obj[0].quantity,
+                shoppingCartId: obj[0].shoppingCartId,
+                key: obj[0].key,
+                totalPrice: obj[0].totalPrice
+             });
         }
       }
     }
@@ -43,29 +42,66 @@ export class ShoppingCart {
 
  static getQuantity(foodItem: FoodItem) {
 
-    return this.getShoppingCart().filter(x => x.foodItemId === foodItem.foodItemId)
-    .map(m => m.dishName ? 1 : 0 as number)
+    return this.getShoppingCart()
+    .filter(x => x.foodItemDescription.toLocaleLowerCase() === foodItem.foodItemDescription.toLocaleLowerCase())
+    .map(m => m.quantity ? 1 : 0 as number)
     .reduce((count, m) => count + m, 0);
 
   }
 
   updateCart(item: FoodItem) {
-    this.items.push({
-        foodItemId: item.foodItemId,
-        price: item.price,
-        shoppingCartId: item.shoppingCartId,
-        imagePath: item.imagePath,
-        quantity: item.quantity || 1,
-        dishName: item.dishName,
-        totalPrice: (item.price * 1),
-        foodCategoryId: item.foodCategoryId,
-        foodItemDescription: item.foodItemDescription
-    });
-    localStorage.setItem('CartItem' + localStorage.length, JSON.stringify(this.items));
-    this.getTotalCount();
+    const cart = ShoppingCart.getShoppingCart();
+    const length = localStorage.length;
+
+    if (length > 0) {
+      const element = cart
+      .filter(x => x.dishName.toLocaleLowerCase() === item.dishName.toLocaleLowerCase())[0];
+
+      if (element) {
+          localStorage.removeItem(element.key);
+          element.quantity += 1;
+          element.totalPrice = (element.price * element.quantity);
+          this.setValuesOn(element);
+          localStorage.setItem(element.key, JSON.stringify(this.items));
+      } else {
+          const isNewItem = true;
+          this.setValuesOn(item, isNewItem);
+          localStorage.setItem('CartItem' + localStorage.length, JSON.stringify(this.items));
+      }
+    }
+
+    if (ShoppingCart.getShoppingCart().length === 0) {
+        const isNewItem = true;
+        this.setValuesOn(item, isNewItem);
+        localStorage.setItem('CartItem' + localStorage.length, JSON.stringify(this.items));
+    }
   }
 
   getTotalCount() {
-    return localStorage.length;
+    let count = 0;
+    ShoppingCart.getShoppingCart().forEach(el => {
+      count += el.quantity;
+    });
+    return count;
+  }
+
+  setValuesOn(item: FoodItem, isNewItem = false) {
+    const key = isNewItem ? ('CartItem' + localStorage.length) : item.key;
+    this.items = [];
+    this.items.push({
+      foodItemId: item.foodItemId,
+      price: item.price,
+      shoppingCartId: item.shoppingCartId,
+      quantity: item.quantity || 1,
+      dishName: item.dishName,
+      totalPrice: (item.price * (item.quantity || 1)),
+      foodCategoryId: item.foodCategoryId,
+      foodItemDescription: item.foodItemDescription,
+      key
+    });
+  }
+
+  removeFromCart(foodItem: FoodItem) {
+    localStorage.removeItem(foodItem.key);
   }
 }

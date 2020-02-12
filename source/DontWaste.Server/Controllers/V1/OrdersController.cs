@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DontWaste.Contracts.Helpers;
@@ -73,7 +74,7 @@ namespace DontWaste.Server.Controllers.V1
             var order = _mapper.Map<CreateOrderRequest, Order>(postRequest);
 
             await _orderService.CreateOrderAsync(order);
-
+            
             var locationUri = _uriService.GetFoodItemUri(order.OrderId.ToString());
             return Created(locationUri, new Response<OrderResponse>(_mapper.Map<OrderResponse>(order)));
         }
@@ -113,11 +114,18 @@ namespace DontWaste.Server.Controllers.V1
             return NotFound();
         }
 
-        private void SetDefaultFieldsFor(CreateOrderRequest postRequest)
+        private async void SetDefaultFieldsFor(CreateOrderRequest postRequest)
         {
             postRequest.OrderId = Guid.NewGuid();
             postRequest.DateCreated = DateTimeProvider.Now;
             postRequest.DateLastModified = DateTimeProvider.Now;
+            postRequest.TotalPrice = GetTotalPrice(postRequest.FoodItems);
+        }
+
+        private static decimal GetTotalPrice(List<CreateFoodItemRequest> postRequestFoodItems)
+        {
+            var totalPrice = postRequestFoodItems.Sum(x => (x.Price * x.Quantity));
+            return totalPrice;
         }
 
         private void UpdateBaseFieldsOn(UpdateOrderRequest request)

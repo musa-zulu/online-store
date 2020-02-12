@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DontWaste.DB.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200210163159_InitialMigration")]
+    [Migration("20200212083554_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,20 +64,12 @@ namespace DontWaste.DB.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("FoodItemId");
 
                     b.HasIndex("FoodCategoryId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("FoodItems");
                 });
@@ -94,6 +86,12 @@ namespace DontWaste.DB.Migrations
                     b.Property<DateTime?>("DateLastModified")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("OrderId");
 
                     b.ToTable("Orders");
@@ -106,10 +104,6 @@ namespace DontWaste.DB.Migrations
                         .HasForeignKey("FoodCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("DontWaste.DB.Domain.Order", null)
-                        .WithMany("FoodItems")
-                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }

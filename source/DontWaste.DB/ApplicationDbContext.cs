@@ -50,7 +50,7 @@ namespace DontWaste.DB
             builder.Entity<FoodItem>()
                 .Property(f => f.FoodCategoryId)
                 .IsRequired();
-
+      
             builder.Entity<Order>()
                 .ToTable("Orders");
 

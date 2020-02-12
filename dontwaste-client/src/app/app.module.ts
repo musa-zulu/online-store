@@ -12,7 +12,6 @@ import { FoodCategoriesService } from './services/food-categories.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-// tslint:disable-next-line: max-line-length
 import { FoodCategoriesFilterComponent } from './dash-bord/food-categories-filter/food-categories-filter.component';
 import { FormsModule } from '@angular/forms';
 import { DialogBoxComponent } from './dash-bord/food-categories/dialog-box/dialog-box.component';
@@ -20,7 +19,6 @@ import { DashBordComponent } from './dash-bord/dash-bord.component';
 import { ShoppingCardSummaryComponent } from './dash-bord/shopping-card-summary/shopping-card-summary.component';
 import { FoodItemsComponent } from './dash-bord/food-items/food-items.component';
 import { FoodItemsCardComponent } from './dash-bord/food-items-card/food-items-card.component';
-import { UpdloadComponent } from './dash-bord/food-items/updload/updload.component';
 import { FoodItemsListComponent } from './dash-bord/food-items/food-items-list/food-items-list.component';
 import { ConfirmationDialogComponent } from './dash-bord/confirmation-dialog/confirmation-dialog.component';
 import { FoodItemsService } from './services/food-items.service';
@@ -41,7 +39,6 @@ import { ShoppingCartComponent } from './dash-bord/shopping-cart/shopping-cart.c
     ShoppingCardSummaryComponent,
     FoodItemsComponent,
     FoodItemsCardComponent,
-    UpdloadComponent,
     FoodItemsListComponent,
     ConfirmationDialogComponent,
     FoodItemQuatityComponent,

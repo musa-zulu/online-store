@@ -3,16 +3,18 @@
   <thead>
     <tr>
       <th>Order number</th>
+      <th>Total price</th>
       <th>Date</th>
+      <th><a href="#">Dashboard</a></th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let order of orders$ | async">
-      <td>{{ order.shipping.name }}</td>
-      <td>{{ order.datePlaced | date}}</td>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.orderNumber }}</td>
+      <td>{{ order.totalPrice }}</td>
+      <td>{{ order.dateCreated | date}}</td>
       <td>
-        <a href="#">View</a>
       </td>
     </tr>
   </tbody>

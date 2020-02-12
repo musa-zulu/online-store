@@ -27,7 +27,9 @@ namespace DontWaste.DB.Migrations
                 {
                     OrderId = table.Column<Guid>(nullable: false),
                     DateCreated = table.Column<DateTime>(nullable: true),
-                    DateLastModified = table.Column<DateTime>(nullable: true)
+                    DateLastModified = table.Column<DateTime>(nullable: true),
+                    OrderNumber = table.Column<int>(nullable: false),
+                    TotalPrice = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,9 +46,7 @@ namespace DontWaste.DB.Migrations
                     DishName = table.Column<string>(nullable: true),
                     FoodItemDescription = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    FoodCategoryId = table.Column<Guid>(nullable: false),
-                    ImagePath = table.Column<string>(nullable: true),
-                    OrderId = table.Column<Guid>(nullable: true)
+                    FoodCategoryId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,23 +57,12 @@ namespace DontWaste.DB.Migrations
                         principalTable: "FoodCategories",
                         principalColumn: "FoodCategoryId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FoodItems_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FoodItems_FoodCategoryId",
                 table: "FoodItems",
                 column: "FoodCategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FoodItems_OrderId",
-                table: "FoodItems",
-                column: "OrderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -82,10 +71,10 @@ namespace DontWaste.DB.Migrations
                 name: "FoodItems");
 
             migrationBuilder.DropTable(
-                name: "FoodCategories");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "FoodCategories");
         }
     }
 }

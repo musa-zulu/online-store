@@ -10,9 +10,7 @@ using DontWaste.Contracts.V1.Requests;
 using DontWaste.Contracts.V1.Responses;
 using DontWaste.DB.Domain;
 using DontWaste.Server.Helpers;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
 namespace DontWaste.Server.Controllers.V1
@@ -23,13 +21,11 @@ namespace DontWaste.Server.Controllers.V1
         private readonly IMapper _mapper;
         private readonly IUriService _uriService;
         private IDateTimeProvider _dateTimeProvider;
-        private IHostingEnvironment _hostingEnvironment;
 
-        public FoodItemsController(IFoodItemsService foodItemsService, IMapper mapper, IUriService uriService, IHostingEnvironment hostingEnvironment)
+        public FoodItemsController(IFoodItemsService foodItemsService, IMapper mapper, IUriService uriService)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _uriService = uriService ?? throw new ArgumentNullException(nameof(uriService));
-            _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment)); ;
             _foodItemsService = foodItemsService ?? throw new ArgumentNullException(nameof(foodItemsService));
         }
         public IDateTimeProvider DateTimeProvider
@@ -118,41 +114,11 @@ namespace DontWaste.Server.Controllers.V1
             return NotFound();
         }
         
-        [HttpPost(ApiRoutes.FoodItems.Upload), DisableRequestSizeLimit]
-        public IActionResult Upload()
-        {
-            try
-            {
-                var file = Request.Form.Files[0];
-                var folderName = Path.Combine("Resources", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-
-                if (file.Length <= 0) return BadRequest();
-
-                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.TrimEnd();
-                var fullPath = Path.Combine(pathToSave, fileName.ToString());
-                var dbPath = Path.Combine(folderName, fileName.ToString());
-
-                using (var stream = new FileStream(fullPath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-
-                return Ok(new { dbPath });
-
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Internal server error");
-            }
-        }
-
         private void SetDefaultFieldsFor(CreateFoodItemRequest postRequest)
         {
             postRequest.FoodItemId = Guid.NewGuid();
             postRequest.DateCreated = DateTimeProvider.Now;
             postRequest.DateLastModified = DateTimeProvider.Now;
-            postRequest.ImagePath = postRequest.ImagePath;
         }
 
         private void UpdateBaseFieldsOn(UpdateFoodItemRequest request)

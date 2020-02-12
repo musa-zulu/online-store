@@ -23,16 +23,20 @@ namespace DontWaste.Contracts.Services
 
             if (paginationFilter == null)
             {
-                return await queryable.Include(x => x.FoodItems).ToListAsync();
+                return await queryable.ToListAsync();
             }
 
             var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
-            return await queryable.Include(x => x.FoodItems)
-                .Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
+            return await queryable.Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
         }
 
         public async Task<bool> CreateOrderAsync(Order order)
         {
+            if (_dataContext.Orders.Any())
+            {
+                var orderNumber = _dataContext.Orders.Max(x => x.OrderNumber);
+                order.OrderNumber = orderNumber + 1;
+            }
             _dataContext.Orders.Add(order);
             return await _dataContext.SaveChangesAsync() > 0;
         }
@@ -57,7 +61,6 @@ namespace DontWaste.Contracts.Services
         public async Task<Order> GetOrderByIdAsync(Guid orderId)
         {
             return await _dataContext.Orders
-                .Include(x => x.FoodItems)
                 .SingleOrDefaultAsync(x => x.OrderId == orderId);
         }
     }

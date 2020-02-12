@@ -57,13 +57,6 @@ namespace DontWaste.Server
             app.UseCors(options =>
                 options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-            app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
-                RequestPath = new PathString("/Resources")
-            });
-
             app.UseMvc();
 
             // This returns the context.

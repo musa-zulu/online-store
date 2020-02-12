@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
+import { Order } from 'src/app/models/order';
 
 @Component({
   selector: 'app-orders',
@@ -7,12 +8,16 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent {
-  orders$;
+  orders: Order[] = [];
   constructor(private shoppingCartService: ShoppingCartService) {
-    this.orders$ = this.getOrders();
+    this.getOrders()
+    .subscribe((orders) => {
+      this.orders = orders.data;
+      console.log();
+    });
   }
 
   private getOrders() {
-    //return this.shoppingCartService.getCart();
+    return this.shoppingCartService.getOrders();
   }
 }
