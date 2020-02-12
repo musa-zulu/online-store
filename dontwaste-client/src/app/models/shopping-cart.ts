@@ -58,11 +58,7 @@ export class ShoppingCart {
       .filter(x => x.dishName.toLocaleLowerCase() === item.dishName.toLocaleLowerCase())[0];
 
       if (element) {
-          localStorage.removeItem(element.key);
-          element.quantity += 1;
-          element.totalPrice = (element.price * element.quantity);
-          this.setValuesOn(element);
-          localStorage.setItem(element.key, JSON.stringify(this.items));
+         this.updateLocalStorage(element);
       } else {
           const isNewItem = true;
           this.setValuesOn(item, isNewItem);
@@ -102,6 +98,14 @@ export class ShoppingCart {
   }
 
   removeFromCart(foodItem: FoodItem) {
-    localStorage.removeItem(foodItem.key);
+    this.updateLocalStorage(foodItem);
+  }
+
+  updateLocalStorage(item: FoodItem) {
+    localStorage.removeItem(item.key);
+    item.quantity += 1;
+    item.totalPrice = (item.price * item.quantity);
+    this.setValuesOn(item);
+    localStorage.setItem(item.key, JSON.stringify(this.items));
   }
 }

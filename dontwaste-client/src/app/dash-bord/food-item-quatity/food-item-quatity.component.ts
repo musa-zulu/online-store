@@ -12,6 +12,7 @@ export class FoodItemQuatityComponent implements OnInit {
   @Input('item') foodItem: FoodItem;
   // tslint:disable-next-line: no-input-rename
   shoppingCart = new ShoppingCart();
+  cart: FoodItem[] = [];
   totalCount;
 
   constructor() {
@@ -32,10 +33,12 @@ export class FoodItemQuatityComponent implements OnInit {
       return ShoppingCart.getQuantity(this.foodItem);
   }
 
-  get getQuantity() {
-    //const key = this.foodItem.key !== undefined ?  this.foodItem.key : 'CartItem0';
-    //const item = JSON.parse(localStorage.getItem(key));
-    return 0;//item.quantity;
+  getQuantity() {
+    let count = 0;
+    this.cart.forEach(el => {
+      count += el.quantity;
+    });
+    return count;
   }
 
   ngOnInit(): void {

@@ -14,14 +14,16 @@ import { FormControl } from '@angular/forms';
 })
 export class ShoppingCartComponent implements OnInit {
   static readonly POLLING_INTERVAL = 3000;
-  cart: ShoppingCart[] = [];
+  //cart: ShoppingCart[] = [];
   cartItems: FoodItem[] = [];
   totalCount: number;
   totalPrice;
   shoppingCart = new ShoppingCart();
+  cart: FoodItem[] = [];
 
   constructor(private shoppingCartService: ShoppingCartService) {
     setInterval(() => { this.getTotalPrice(); }, 1000);
+    setInterval(() => { this.getTotalCount(); }, 1000);
     setInterval(() => { this.getTotalCount(); }, 1000);
   }
 
@@ -29,6 +31,7 @@ export class ShoppingCartComponent implements OnInit {
     this.cartItems = ShoppingCart.getShoppingCart();
     this.getTotalPrice();
     this.totalCount = this.shoppingCart.getTotalCount();
+    this.getCartItems();
   }
 
   clearCart() {
@@ -48,12 +51,17 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   checkOut() {
-    this.shoppingCartService.saveOrder(this.getItemsInCart());
+    this.shoppingCartService.saveOrder(this.pupulateItemsInCart());
   }
 
-  getItemsInCart() {
+  getCartItems() {
+    this.cart = ShoppingCart.getShoppingCart();
+    return this.cart;
+  }
+
+  pupulateItemsInCart() {
     const length = localStorage.length;
-    let order = new Order();
+    const order = new Order();
     let total = 0;
     if (length > 0) {
       for (let i = 0; i <= length; i++) {
