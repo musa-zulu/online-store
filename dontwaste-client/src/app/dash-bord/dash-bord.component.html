@@ -15,7 +15,7 @@
   </div>
   <div class="col">
       <div class="row">
-        <ng-container *ngFor="let item of filteredFoodItems; let i = index">
+        <ng-container *ngFor="let item of foodItems; let i = index">
           <div class="col">
              <app-food-items-card [foodItem]="item"></app-food-items-card>
           </div>

@@ -62,6 +62,7 @@ export class ShoppingCartComponent implements OnInit {
     .then((confirmed) => {
       if (confirmed) {
         this.shoppingCartService.saveOrder(this.pupulateItemsInCart());
+        this.clearCart();
         this.router.navigate(['/orders']);
       }
       console.log('User confirmed:', confirmed);

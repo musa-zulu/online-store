@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FoodItem } from '../models/food-item';
-import { timer } from 'rxjs';
 import { ShoppingCart } from '../models/shopping-cart';
 import { FoodCategoriesService } from '../services/food-categories.service';
 import { FoodCategory } from '../models/food-category';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dash-bord',
@@ -19,6 +17,7 @@ export class DashBordComponent implements OnInit {
   foodItems: FoodItem[] = [];
   filteredFoodItems: FoodItem[] = [];
   foodCategory: FoodCategory;
+  executed = false;
 
   constructor(private foodCategoriesService: FoodCategoriesService) {
     this.getCategories();
@@ -32,14 +31,20 @@ export class DashBordComponent implements OnInit {
   }
 
   getCategories() {
-      return timer(0, DashBordComponent.POLLING_INTERVAL)
-      .pipe(switchMap(() => this.foodCategoriesService.getFoodCategories()));
+     this.foodCategoriesService.getFoodCategories()
+    .subscribe(async (foodCategories) => {
+       this.categories = await foodCategories.data;
+       if (!this.executed) {
+        this.executed = true;
+       this.populateFoodItemsFor(this.categories);
+       }
+    });
   }
 
   setCurrentCategory(newCategory: string) {
       this.currentCategory = newCategory;
       if (newCategory === null)   {
-        this.getAllCategories();
+         this.getCategories();
       }
       this.applyFilter(newCategory);
   }
@@ -48,16 +53,19 @@ export class DashBordComponent implements OnInit {
     return ShoppingCart.getShoppingCart();
   }
 
-  private async getAllCategories() {
-    this.getCategories()
-    .subscribe(async (foodCategories) => {
-       this.categories = await foodCategories.data;
-       console.log();
+  populateFoodItemsFor(categories: FoodCategory[]) {
+    categories.forEach(element => {
+      element.foodItems.forEach(fi => {
+        if (this.filteredFoodItems.indexOf(fi) === -1) {
+          this.filteredFoodItems.push(fi);
+        }
+      });
     });
   }
 
   private applyFilter(foodCategoryId: string) {
     let category = [];
+    this.foodItems = [];
     if (foodCategoryId !== null) {
       category = this.categories.filter(x => x.foodCategoryId === foodCategoryId);
       this.foodItems = category[0].foodItems;
@@ -70,6 +78,5 @@ export class DashBordComponent implements OnInit {
         });
       });
     }
-    this.filteredFoodItems = this.foodItems;
   }
 }
