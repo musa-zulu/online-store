@@ -24,10 +24,15 @@ h1, h2, h3 {
 }
 
 .list-group-item.active {
-  background-color: #0030b3;
-  border-color: #0030b3;
+  background-color: #da4315 !important;
+  border-color: #da4315 !important;
+}
+
+.navbar-nav .nav-link .active {
+  background-color: #da4315 !important;
+  border-color: #da4315 !important;
 }
 
 .form-control:focus {
-  border-color: #0030b3;
+  border-color: #1eb300;
 }
