@@ -11,6 +11,7 @@ namespace DontWaste.DB
         DbSet<FoodItem> FoodItems { get; set; }
         DbSet<FoodCategory> FoodCategories { get; set; }
         DbSet<Order> Orders { get; set; }
+        DbSet<OrderItem> OrderItems { get; set; }
         Task<int> SaveChangesAsync();
     }
 
@@ -26,6 +27,7 @@ namespace DontWaste.DB
         public DbSet<FoodItem> FoodItems { get; set; }
         public DbSet<FoodCategory> FoodCategories { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         public Task<int> SaveChangesAsync() => base.SaveChangesAsync();
 
@@ -53,6 +55,9 @@ namespace DontWaste.DB
       
             builder.Entity<Order>()
                 .ToTable("Orders");
+
+            builder.Entity<OrderItem>()
+                .ToTable("OrderItems");
 
             builder.Entity<FoodCategory>()
                 .Property(f => f.Description)

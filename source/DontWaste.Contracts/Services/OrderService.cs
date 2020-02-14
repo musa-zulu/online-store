@@ -30,15 +30,33 @@ namespace DontWaste.Contracts.Services
             return await queryable.Skip(skip).Take(paginationFilter.PageSize).OrderByDescending(o => o.OrderNumber).ToListAsync();
         }
 
-        public async Task<bool> CreateOrderAsync(Order order)
+        public async Task<bool> CreateOrderAsync(Order order, List<FoodItem> items)
         {
             if (_dataContext.Orders.Any())
             {
                 var orderNumber = _dataContext.Orders.Max(x => x.OrderNumber);
                 order.OrderNumber = orderNumber + 1;
             }
-            _dataContext.Orders.Add(order);
-            return await _dataContext.SaveChangesAsync() > 0;
+            CreateOrderItem(items, order.OrderId);
+            await _dataContext.Orders.AddAsync(order);
+            var saved = await _dataContext.SaveChangesAsync() > 0;
+            return saved;
+        }
+
+        private void CreateOrderItem(List<FoodItem> items, Guid orderId)
+        {
+            foreach (var foodItem in items)
+            {
+                var orderItem = new OrderItem()
+                {
+                    OrderItemId = new Guid(),
+                    FoodItemId = foodItem.FoodItemId,
+                    OrderId = orderId,
+                    DateLastModified = DateTime.Now,
+                    DateCreated = DateTime.Now
+                };
+                _dataContext.OrderItems.Add(orderItem);
+            }
         }
 
         public async Task<bool> UpdateOrderAsync(Order orderToUpdate)

@@ -73,7 +73,9 @@ namespace DontWaste.Server.Controllers.V1
 
             var order = _mapper.Map<CreateOrderRequest, Order>(postRequest);
 
-            await _orderService.CreateOrderAsync(order);
+            var items = _mapper.Map<List<CreateFoodItemRequest>, List<FoodItem>>(postRequest.FoodItems);
+
+            await _orderService.CreateOrderAsync(order, items);
             
             var locationUri = _uriService.GetFoodItemUri(order.OrderId.ToString());
             return Created(locationUri, new Response<OrderResponse>(_mapper.Map<OrderResponse>(order)));

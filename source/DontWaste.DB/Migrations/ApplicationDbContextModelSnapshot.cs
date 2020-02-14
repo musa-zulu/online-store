@@ -95,6 +95,29 @@ namespace DontWaste.DB.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("DontWaste.DB.Domain.OrderItem", b =>
+                {
+                    b.Property<Guid>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateLastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("FoodItemId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OrderItemId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("DontWaste.DB.Domain.FoodItem", b =>
                 {
                     b.HasOne("DontWaste.DB.Domain.FoodCategory", "FoodCategory")
