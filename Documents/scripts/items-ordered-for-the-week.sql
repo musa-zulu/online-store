@@ -4,6 +4,8 @@ SELECT DISTINCT DishName, FoodItemDescription, Price, Count(*) as Items_Ordered 
 LEFT JOIN [OrderItems] ON
 [OrderItems].[FoodItemId] = [FoodItems].[FoodItemId]
 LEFT JOIN [Orders] on [Orders].[OrderId] = [OrderItems].[OrderId]
-WHERE (SELECT CONVERT(DATE, OrderItems.DateCreated, 103)) >=  (SELECT CONVERT(DATE, GETDATE(), 103))
+WHERE (SELECT CONVERT(DATE, OrderItems.DateCreated, 103)) >=   (select  dateadd(day, 2-datepart(dw, getdate()), CONVERT(date,getdate())))
 and (SELECT CONVERT(DATE, OrderItems.DateCreated, 103)) <  (select  dateadd(day, 8-datepart(dw, getdate()), CONVERT(date,getdate())))
 GROUP BY FoodItems.DishName, FoodItemDescription, Price
+
+
