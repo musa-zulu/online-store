@@ -1,7 +1,7 @@
 ﻿using System;
-using DontWaste.Contracts.V1.Requests;
+using OnlineStore.Contracts.V1.Requests;
 
-namespace DontWaste.Contracts.Interfaces.Services
+namespace OnlineStore.Contracts.Interfaces.Services
 {
     public interface IUriService
     {

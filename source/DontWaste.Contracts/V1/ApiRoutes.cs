@@ -1,4 +1,4 @@
-﻿namespace DontWaste.Contracts.V1
+﻿namespace OnlineStore.Contracts.V1
 {
     public static class ApiRoutes
     {

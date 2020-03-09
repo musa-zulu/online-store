@@ -1,4 +1,4 @@
-﻿namespace DontWaste.Contracts.V1.Responses
+﻿namespace OnlineStore.Contracts.V1.Responses
 {
     public class Response<T>
     {

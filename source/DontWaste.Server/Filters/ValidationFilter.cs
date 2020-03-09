@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using DontWaste.Contracts.V1.Responses;
+using OnlineStore.Contracts.V1.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace DontWaste.Server.Filters
+namespace OnlineStore.Server.Filters
 {
     public class ValidationFilter : IAsyncActionFilter
     {

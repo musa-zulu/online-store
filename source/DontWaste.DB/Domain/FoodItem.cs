@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DontWaste.DB.Domain
+namespace OnlineStore.DB.Domain
 {
     public class FoodItem : EntityBase
     {

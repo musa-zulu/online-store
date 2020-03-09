@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DontWaste.Contracts.Interfaces.Services;
-using DontWaste.Contracts.V1.Requests;
-using DontWaste.Contracts.V1.Responses;
-using DontWaste.DB.Domain;
+using OnlineStore.Contracts.Interfaces.Services;
+using OnlineStore.Contracts.V1.Requests;
+using OnlineStore.Contracts.V1.Responses;
+using OnlineStore.DB.Domain;
 
-namespace DontWaste.Server.Helpers
+namespace OnlineStore.Server.Helpers
 {
     public class PaginationHelpers
     {

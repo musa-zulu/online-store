@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DontWaste.Contracts.Helpers
+namespace OnlineStore.Contracts.Helpers
 {
     public interface IDateTimeProvider
     {

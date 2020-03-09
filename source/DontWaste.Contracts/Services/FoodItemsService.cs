@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DontWaste.Contracts.Interfaces.Services;
-using DontWaste.DB;
-using DontWaste.DB.Domain;
+using OnlineStore.Contracts.Interfaces.Services;
+using OnlineStore.DB;
+using OnlineStore.DB.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace DontWaste.Contracts.Services
+namespace OnlineStore.Contracts.Services
 {
     public class FoodItemsService : IFoodItemsService
     {

@@ -1,4 +1,4 @@
-﻿namespace DontWaste.Server.Options
+﻿namespace OnlineStore.Server.Options
 {
     public class SwaggerOptions
     {

@@ -1,8 +1,8 @@
 using System;
 using System.IO;
 using AutoMapper;
-using DontWaste.DB;
-using DontWaste.Server.Installers;
+using OnlineStore.DB;
+using OnlineStore.Server.Installers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,9 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using SwaggerOptions = DontWaste.Server.Options.SwaggerOptions;
+using SwaggerOptions = OnlineStore.Server.Options.SwaggerOptions;
 
-namespace DontWaste.Server
+namespace OnlineStore.Server
 {
     public class Startup
     {

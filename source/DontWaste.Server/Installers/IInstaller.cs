@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DontWaste.Server.Installers
+namespace OnlineStore.Server.Installers
 {
     public interface IInstaller
     {

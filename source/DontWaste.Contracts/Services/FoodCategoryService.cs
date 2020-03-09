@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using DontWaste.Contracts.Interfaces.Services;
-using DontWaste.DB;
-using DontWaste.DB.Domain;
+using OnlineStore.Contracts.Interfaces.Services;
+using OnlineStore.DB;
+using OnlineStore.DB.Domain;
 
-namespace DontWaste.Contracts.Services
+namespace OnlineStore.Contracts.Services
 {
     public class FoodCategoryService : IFoodCategoryService
     {

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
-using DontWaste.Contracts.Helpers;
-using DontWaste.Contracts.Interfaces.Services;
-using DontWaste.Contracts.V1;
-using DontWaste.Contracts.V1.Requests;
-using DontWaste.Contracts.V1.Responses;
-using DontWaste.DB.Domain;
-using DontWaste.Server.Helpers;
+using OnlineStore.Contracts.Helpers;
+using OnlineStore.Contracts.Interfaces.Services;
+using OnlineStore.Contracts.V1;
+using OnlineStore.Contracts.V1.Requests;
+using OnlineStore.Contracts.V1.Responses;
+using OnlineStore.DB.Domain;
+using OnlineStore.Server.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 
-namespace DontWaste.Server.Controllers.V1
+namespace OnlineStore.Server.Controllers.V1
 {
     public class FoodItemsController : Controller
     {

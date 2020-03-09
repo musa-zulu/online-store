@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using DontWaste.Contracts.V1.Responses;
-using DontWaste.DB.Domain;
+using OnlineStore.Contracts.V1.Responses;
+using OnlineStore.DB.Domain;
 
-namespace DontWaste.Server.MappingProfile
+namespace OnlineStore.Server.MappingProfile
 {
     public class DomainToResponseProfile : Profile
     {

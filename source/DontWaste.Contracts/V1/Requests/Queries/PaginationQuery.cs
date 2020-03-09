@@ -1,4 +1,4 @@
-﻿namespace DontWaste.Contracts.V1.Requests
+﻿namespace OnlineStore.Contracts.V1.Requests
 {
     public class PaginationQuery
     {

@@ -1,4 +1,4 @@
-﻿namespace DontWaste.DB.Domain
+﻿namespace OnlineStore.DB.Domain
 {
     public class PaginationFilter
     {

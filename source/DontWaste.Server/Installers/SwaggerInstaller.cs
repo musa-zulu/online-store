@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
-namespace DontWaste.Server.Installers
+namespace OnlineStore.Server.Installers
 {
     public class SwaggerInstaller : IInstaller
     {

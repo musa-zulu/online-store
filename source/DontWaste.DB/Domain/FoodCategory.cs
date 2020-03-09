@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DontWaste.DB.Domain
+namespace OnlineStore.DB.Domain
 {
     public class FoodCategory : EntityBase
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.AspNetCore.WebUtilities;
-using DontWaste.Contracts.Interfaces.Services;
-using DontWaste.Contracts.V1;
-using DontWaste.Contracts.V1.Requests;
+using OnlineStore.Contracts.Interfaces.Services;
+using OnlineStore.Contracts.V1;
+using OnlineStore.Contracts.V1.Requests;
 
-namespace DontWaste.Contracts.Services
+namespace OnlineStore.Contracts.Services
 {
     public class UriService : IUriService
     {

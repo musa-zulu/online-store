@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using DontWaste.DB.Domain;
+using OnlineStore.DB.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
-namespace DontWaste.DB
+namespace OnlineStore.DB
 {
     public interface IApplicationDbContext
     {

@@ -1,13 +1,13 @@
-﻿using DontWaste.Contracts.Interfaces.Services;
-using DontWaste.Contracts.Services;
-using DontWaste.Server.Filters;
+﻿using OnlineStore.Contracts.Interfaces.Services;
+using OnlineStore.Contracts.Services;
+using OnlineStore.Server.Filters;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DontWaste.Server.Installers
+namespace OnlineStore.Server.Installers
 {
     public class MvcInstaller : IInstaller
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DontWaste.DB.Domain;
+using OnlineStore.DB.Domain;
 
-namespace DontWaste.Contracts.Interfaces.Services
+namespace OnlineStore.Contracts.Interfaces.Services
 {
     public interface IOrderService
     {

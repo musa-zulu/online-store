@@ -205,9 +205,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DontWaste.DB\DontWaste.DB.csproj">
+    <ProjectReference Include="..\DontWaste.DB\OnlineStore.DB.csproj">
       <Project>{D72AFEF7-94CF-4046-8CA1-1359E03F35DA}</Project>
-      <Name>DontWaste.DB</Name>
+      <Name>OnlineStore.DB</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

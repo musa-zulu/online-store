@@ -1,11 +1,11 @@
-﻿using DontWaste.Contracts.Interfaces.Services;
-using DontWaste.Contracts.Services;
-using DontWaste.DB;
+﻿using OnlineStore.Contracts.Interfaces.Services;
+using OnlineStore.Contracts.Services;
+using OnlineStore.DB;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
-namespace DontWaste.Server.Installers
+namespace OnlineStore.Server.Installers
 {
     public class DbInstaller : IInstaller
     {
